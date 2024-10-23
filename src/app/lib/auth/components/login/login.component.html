@@ -1,0 +1,29 @@
+<div class="p-fluid p-formgrid p-grid justify-content-center" style="height: 100vh; align-items: center;">
+  <div class="p-field p-col-12 p-md-4">
+    <div class="card">
+      <div class="p-card-header">
+        <h2>Login</h2>
+      </div>
+
+      <div class="p-card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="p-field">
+            <label for="username">Username</label>
+            <input id="username" type="text" pInputText formControlName="username" />
+            <p-message *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" severity="error" text="Username is required"></p-message>
+          </div>
+
+          <div class="p-field">
+            <label for="password">Password</label>
+            <p-password id="password" formControlName="password" toggleMask feedback="false"></p-password>
+            <p-message *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" severity="error" text="Password is required"></p-message>
+          </div>
+
+          <div class="p-field">
+            <button pButton type="submit" label="Login" icon="pi pi-sign-in" class="p-button-primary p-button-block"></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
