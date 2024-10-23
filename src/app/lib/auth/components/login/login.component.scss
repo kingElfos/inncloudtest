@@ -1,13 +1,50 @@
-.card {
-  padding: 2rem;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
+.login-container {
+  height: 100vh; /* 100% de la vista */
+  display: flex;
 
-h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
+  .left-section {
+    background: linear-gradient(to bottom right, #EA2E25, #F98D0B); /* Degradado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    width: 400px;
 
-button {
-  width: 100%;
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .logo {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+  }
+
+  /* Responsivo: En pantallas pequeñas */
+  @media only screen and (max-width: 768px) {
+    .left-section {
+      display: none; /* Ocultamos el lado izquierdo en pantallas pequeñas */
+    }
+
+    .right-section {
+      width: 100%; /* Llenamos todo el espacio con el formulario */
+    }
+  }
 }

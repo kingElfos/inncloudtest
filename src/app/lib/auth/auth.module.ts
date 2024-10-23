@@ -8,7 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-
+import { CardModule } from 'primeng/card';
 @NgModule({
   declarations: [LoginComponent],
   imports: [
@@ -18,7 +18,8 @@ import { MessageModule } from 'primeng/message';
     InputTextModule,
     PasswordModule,
     ButtonModule,
-    MessageModule
+    MessageModule,
+    CardModule
   ],
   providers:[AuthService]
 })
