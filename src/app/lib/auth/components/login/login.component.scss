@@ -1,9 +1,14 @@
+
+
 .login-container {
-  height: 100vh; /* 100% de la vista */
+  height: 100vh;
   display: flex;
 
+  .login-btn{
+    margin-top: 10px;
+  }
   .left-section {
-    background: linear-gradient(to bottom right, #EA2E25, #F98D0B); /* Degradado */
+    background: linear-gradient(to bottom right, #EA2E25, #F98D0B); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +26,7 @@
         width: 100px;
         height: 100px;
         margin-bottom: 20px;
+        border-radius: 10px;
       }
 
       h2 {
@@ -30,21 +36,32 @@
   }
 
   .right-section {
+    background: linear-gradient(to bottom right, #FFFFFF, #F98D0B);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     width: 100%;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   }
 
-  /* Responsivo: En pantallas pequeñas */
   @media only screen and (max-width: 768px) {
     .left-section {
-      display: none; /* Ocultamos el lado izquierdo en pantallas pequeñas */
+      display: none;
     }
 
     .right-section {
-      width: 100%; /* Llenamos todo el espacio con el formulario */
+      width: 100%;
     }
   }
 }

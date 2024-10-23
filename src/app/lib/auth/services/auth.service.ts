@@ -7,7 +7,7 @@ export class AuthService {
   private isAuthenticated = false;
 
   login(username: string, password: string): boolean {
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'innclod' && password === 'somepassword') {
       this.isAuthenticated = true;
       localStorage.setItem('isAuthenticated', 'true');
       return true;
