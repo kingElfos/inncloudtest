@@ -3,9 +3,6 @@
   <div class="p-d-flex p-jc-end p-mb-2 btn-add">
     <button pButton label="Agregar Tarea" icon="pi pi-plus" class="p-button-success"></button>
   </div>
-
-
-
   <ng-container *ngIf="tasks$| async as tasks">
 
       <p-table [value]="tasks" class="p-datatable-gridlines p-datatable-sm p-datatable-striped p-mb-4" [tableStyle]="{'min-width': '50rem'}">
