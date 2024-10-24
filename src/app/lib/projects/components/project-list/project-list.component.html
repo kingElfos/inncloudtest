@@ -1,13 +1,12 @@
 <div class="project-list-container">
-  <!-- Botón fijo para añadir proyectos -->
+  
   <div class="add-project-button">
     <button pButton label="Añadir Proyecto" icon="pi pi-plus" class="p-button-raised p-button-primary" (click)="addProject()"></button>
   </div>
 
-  <!-- Título de la lista -->
+
   <h1 class="p-mb-4">Lista de Proyectos</h1>
 
-  <!-- Lista de proyectos como cards en fila -->
   <div class="project-row p-d-flex p-jc-center p-ai-center">
     <div class="p-card" *ngFor="let project of projects">
       <p-card  subheader="ID: {{ project.id }}" class="p-mb-3">
@@ -23,11 +22,11 @@
         </ng-template>
 
         <ng-template pTemplate="footer">
-          <div class="p-d-flex p-jc-between">
-            <!-- Botón para ver tareas -->
+          <div class="p-d-flex">
+            
             <button pButton label="Ver" icon="pi pi-list" class="p-button-secondary" (click)="viewTasks(project.id)"></button>
 
-            <!-- Botón para editar proyecto -->
+
             <button pButton label="Editar" icon="pi pi-pencil" class="p-button-warning" (click)="editProject(project.id)"></button>
           </div>
         </ng-template>

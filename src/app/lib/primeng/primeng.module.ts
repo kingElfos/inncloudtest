@@ -6,6 +6,7 @@ import { MessageModule } from 'primeng/message';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
+import { CheckboxModule } from 'primeng/checkbox';
 @NgModule({
   providers:[MessageService],
   exports:[
@@ -14,6 +15,7 @@ import { MessageService } from 'primeng/api';
     ButtonModule,
     MessageModule,
     TableModule,
+    CheckboxModule,
     CardModule]
 })
 export class PrimengModule { }

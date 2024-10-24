@@ -3,26 +3,32 @@
 }
 
 .task-completed {
-  color: green; /* Color para tareas completadas */
+  color: green; 
   font-weight: bold;
 }
 
 .task-not-completed {
-  color: red; /* Color para tareas no completadas */
+  color: red; 
   font-weight: bold;
 }
 
-/* Para un estilo más atractivo en la tabla */
 .p-datatable {
   border: 1px solid #ddd;
 }
 
 .p-datatable th {
-  background-color: #EA2E25; /* Color de fondo del encabezado */
+  background-color: #EA2E25; 
   color: white;
   text-align: left;
 }
 
 .p-datatable td {
   padding: 10px;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }

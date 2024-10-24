@@ -25,4 +25,15 @@ export class TaskListComponent implements OnInit {
       this.tasks = data;
     });
   }
+
+
+  updateTaskStatus(task: Task) {
+  
+    console.log(`Tarea ${task.id} actualizada:`, task.completed);
+  }
+
+  deleteTask(taskId: number) {
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
+    console.log(`Tarea con ID ${taskId} eliminada.`);
+  }
 }
