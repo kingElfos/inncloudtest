@@ -20,6 +20,10 @@
         </ng-template>
         <ng-template pTemplate="content">
           <p>{{ project.description || "Descripción" }}</p>
+          <p><b>company: </b><span class="company">{{ project.company.name}}</span></p>
+          <p><b>web: </b>{{ project.website}}</p>
+
+
         </ng-template>
         <ng-template pTemplate="footer">
           <div class="p-d-flex">

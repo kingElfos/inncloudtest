@@ -29,13 +29,16 @@ export class ProjectFormComponent implements OnInit {
     }
 
   }
+ 
 
   initForm(project?: ProjectI) {
     this.projectForm = this.fb.group({
       id: [project?.id || crypto.randomUUID()],
       name: [project?.name || '', Validators.required],
-      email: [project?.email || '', Validators.email],
-      description: [project?.description || '']
+      email: [project?.email || 'bcadavid@gmail.com', Validators.email],
+      description: [project?.description || ''],
+      website: [project?.website || 'www.incloud.com'],
+      company:[project?.company || {name:"incloud"}]
     });
   }
 
