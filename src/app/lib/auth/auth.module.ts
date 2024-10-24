@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
-import {AuthService} from './services/auth.service';
-import {AuthRoutingModule} from './routing/auth-routing.module';
-import {PrimengModule} from '../primeng/primeng.module';
+import { AuthService } from './services/auth.service';
+import { AuthRoutingModule } from './routing/auth-routing.module';
+import { PrimengModule } from '../primeng/primeng.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -12,9 +12,8 @@ import {PrimengModule} from '../primeng/primeng.module';
     CommonModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    PrimengModule
+    PrimengModule,
   ],
-  providers:[AuthService]
+  providers: [AuthService],
 })
-export class AuthModule { }
-
+export class AuthModule {}

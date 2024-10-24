@@ -1,18 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { ProjectI } from '../models/project.model';
-import { throwError, of , BehaviorSubject, Observable, tap } from 'rxjs';
+import { of, BehaviorSubject, Observable, tap } from 'rxjs';
 import { HttpErrorHandlerService } from '../../shared/services/http-error-handler.service';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
   private apiUrl = 'https://jsonplaceholder.typicode.com/users';
-  public projects$ = new BehaviorSubject < ProjectI[] > ([]);
+  public projects$ = new BehaviorSubject<ProjectI[]>([]);
+  public isLoading$ = new BehaviorSubject<boolean>(false);
   private errorHandler = inject(HttpErrorHandlerService);
   private http = inject(HttpClient);
 
@@ -21,7 +20,7 @@ export class ProjectService {
   }
 
   get isbrowser() {
-    return typeof window !== 'undefined'
+    return typeof window !== 'undefined';
   }
 
   private load() {
@@ -30,35 +29,35 @@ export class ProjectService {
     if (this.isbrowser) {
       const localProjects = localStorage.getItem('projects');
       if (localProjects) {
-        this.projects$.next(JSON.parse(localProjects))
+        this.projects$.next(JSON.parse(localProjects));
       } else {
-        this.get().pipe((
-            tap((pr) => this.setLsProjects(pr))))
+        this.isLoading$.next(true);
+        this.get()
+          .pipe(
+            tap((pr) => this.setLsProjects(pr)),
+            finalize(() => this.isLoading$.next(false)),
+          )
           .subscribe({
             next: (projects) => this.projects$.next(projects),
-            error: (error) => this.errorHandler.handleError(error)
+            error: (error) => this.errorHandler.handleError(error),
           });
       }
     }
-
   }
 
-
-
-
-  public get(): Observable < ProjectI[] > {
-    return this.http.get < ProjectI[] > (this.apiUrl).pipe(
+  public get(): Observable<ProjectI[]> {
+    return this.http.get<ProjectI[]>(this.apiUrl).pipe(
       catchError((error: HttpErrorResponse) => {
         this.errorHandler.handleError(error);
-        return of([])
-      })
+        return of([]);
+      }),
     );
   }
 
   public insert(project: ProjectI) {
     const projects = this.projects$.value;
-    projects.unshift(project)
-    this.update(projects)
+    projects.unshift(project);
+    this.update(projects);
   }
 
   public put(id: string, project: ProjectI) {
@@ -66,7 +65,7 @@ export class ProjectService {
     const index = projects.findIndex((pr) => pr.id == id);
     if (index !== -1) {
       projects[index] = project;
-      this.update(projects)
+      this.update(projects);
     }
   }
   public delete(id: string) {
@@ -87,9 +86,7 @@ export class ProjectService {
 
   private setLsProjects(projects: ProjectI[]) {
     if (this.isbrowser) {
-      localStorage.setItem("projects", JSON.stringify(projects))
+      localStorage.setItem('projects', JSON.stringify(projects));
     }
   }
-
-
 }

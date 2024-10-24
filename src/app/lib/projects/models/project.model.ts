@@ -3,8 +3,8 @@ export interface ProjectI {
   name: string;
   email: string;
   company: {
-    name: string,
+    name: string;
   };
   website: string;
-  description: string
+  description: string;
 }

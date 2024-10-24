@@ -1,14 +1,12 @@
-
-
 .login-container {
   height: 100vh;
   display: flex;
 
-  .login-btn{
+  .login-btn {
     margin-top: 10px;
   }
   .left-section {
-    background: linear-gradient(to bottom right, #EA2E25, #F98D0B); 
+    background: linear-gradient(to bottom right, #ea2e25, #f98d0b);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +34,7 @@
   }
 
   .right-section {
-    background: linear-gradient(to bottom right, #FFFFFF, #E6D18F);
+    background: linear-gradient(to bottom right, #ffffff, #e6d18f);
     display: flex;
     justify-content: center;
     align-items: center;

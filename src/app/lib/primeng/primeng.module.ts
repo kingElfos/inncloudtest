@@ -13,8 +13,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
-  providers:[MessageService,ConfirmationService],
-  exports:[
+  providers: [MessageService, ConfirmationService],
+  exports: [
     ProgressSpinnerModule,
     ConfirmDialogModule,
     InputTextModule,
@@ -24,7 +24,7 @@ import { ConfirmationService } from 'primeng/api';
     ToastModule,
     TableModule,
     CheckboxModule,
-    CardModule
-    ]
+    CardModule,
+  ],
 })
-export class PrimengModule { }
+export class PrimengModule {}

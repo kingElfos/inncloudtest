@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, inject } from '@angular/core';
+import { Component,OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskI } from '../../models/task.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-task-form',
-  templateUrl: './task-form.component.html'
+  templateUrl: './task-form.component.html',
 })
 export class TaskFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -16,7 +16,7 @@ export class TaskFormComponent implements OnInit {
   protected taskService = inject(TaskService);
   private messageService = inject(MessageService);
   protected taskForm!: FormGroup;
-  protected isEdit: boolean = false;
+  protected isEdit = false;
   private projectId!: string;
   private taskId!: string;
 
@@ -30,9 +30,7 @@ export class TaskFormComponent implements OnInit {
     } else {
       this.initForm();
     }
-
   }
-
 
   initForm(task?: TaskI) {
     this.taskForm = this.fb.group({
@@ -52,7 +50,7 @@ export class TaskFormComponent implements OnInit {
           severity: 'success',
           summary: 'Operación exitosa',
           detail: 'Tarea actualizada',
-          life: 1500
+          life: 1500,
         });
       } else {
         this.taskService.insert(task);
@@ -60,10 +58,9 @@ export class TaskFormComponent implements OnInit {
           severity: 'success',
           summary: 'Operación exitosa',
           detail: 'Tarea creada',
-          life: 1500
+          life: 1500,
         });
       }
-
 
       setTimeout(() => {
         this.router.navigate([`/tasks/list/${this.projectId}`]);

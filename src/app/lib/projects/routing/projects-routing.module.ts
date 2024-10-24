@@ -6,11 +6,11 @@ const routes: Routes = [
   { path: 'list', component: ProjectListComponent },
   { path: 'handle', component: ProjectFormComponent },
   { path: 'handle/:projectId', component: ProjectFormComponent },
-  { path: '', redirectTo:'list', pathMatch:'full' }
+  { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ProjectsRoutingModule {}

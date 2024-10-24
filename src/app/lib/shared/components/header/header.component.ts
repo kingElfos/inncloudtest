@@ -8,16 +8,16 @@ import { MenubarModule } from 'primeng/menubar';
   standalone: true,
   imports: [RouterModule, CommonModule, ButtonModule, MenubarModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-
-  public items = [{
-    label: 'Home',
-    link:'/projects/list',
-    icon: 'pi pi-home'
-  }]
-
+  public items = [
+    {
+      label: 'Home',
+      link: '/projects/list',
+      icon: 'pi pi-home',
+    },
+  ];
 
   logout() {
     if (typeof window !== 'undefined') {

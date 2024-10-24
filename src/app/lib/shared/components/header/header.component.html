@@ -1,16 +1,26 @@
 <div class="card">
   <p-menubar [model]="items">
-    
+    <ng-template pTemplate="item" let-item let-root="root">
+      <a
+        pRipple
+        class="flex align-items-center p-menuitem-link"
+        [routerLink]="item.link"
+      >
+        <span [class]="item.icon"></span>
+      </a>
+    </ng-template>
 
-     <ng-template pTemplate="item" let-item let-root="root">
-            <a pRipple class="flex align-items-center p-menuitem-link" [routerLink]="item.link">
-                <span [class]="item.icon"></span>
-            </a>
-        </ng-template>
-    
     <ng-template pTemplate="end">
       <div class="flex align-items-center gap-2">
-        <button routerLink="/auth/login" pButton type="button" icon="pi pi-sign-out" label="Logout" class="p-button-danger" (click)="logout()"></button>
+        <button
+          routerLink="/auth/login"
+          pButton
+          type="button"
+          icon="pi pi-sign-out"
+          label="Logout"
+          class="p-button-danger"
+          (click)="logout()"
+        ></button>
       </div>
     </ng-template>
   </p-menubar>

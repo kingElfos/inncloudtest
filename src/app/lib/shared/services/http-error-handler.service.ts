@@ -1,24 +1,19 @@
-import { Injectable,inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpErrorHandlerService {
-
-  private messageService=inject(MessageService);
+  private messageService = inject(MessageService);
 
   handleError(error: HttpErrorResponse) {
-    let errorMessage: string;
-
-    errorMessage = error.error.message;
-
-
+    const errorMessage:string= error.error.message;
     this.messageService.add({
       severity: 'error',
       summary: 'Error en la petición',
-      detail: errorMessage
+      detail: errorMessage,
     });
   }
 }

@@ -1,44 +1,71 @@
 <div class="project-list-container">
   <div class="add-project-button">
-    <button routerLink="/projects/handle" pButton label="Añadir Proyecto" icon="pi pi-plus" class="p-button-raised p-button-primary"></button>
+    <button
+      routerLink="/projects/handle"
+      pButton
+      label="Añadir Proyecto"
+      icon="pi pi-plus"
+      class="p-button-raised p-button-primary"
+    ></button>
   </div>
   <h1 class="p-mb-4">Lista de Proyectos</h1>
-  @if(!isLoading){
-  <div class="project-row p-d-flex p-jc-center p-ai-center">
-    @for(project of projects$| async;track project.id){
-    <div class="p-card">
-      <p-card class="p-mb-3">
-        <button pButton icon="pi pi-trash" class="p-button-danger p-button-rounded delete-button" (click)="confirmDelete(project.id)">
-        </button>
-        
-        <ng-template pTemplate="header">
-          <div class="project-header" style="position: relative;">
-            {{ project.name }}
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <p>{{ project.description || "Descripción" }}</p>
-          <p><b>company: </b><span class="company">{{ project.company.name}}</span></p>
-          <p><b>web: </b>{{ project.website}}</p>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <div class="p-d-flex">
-            <button [routerLink]="'/tasks/list/' + project.id" pButton label="Ver" icon="pi pi-list" class="p-button-secondary">
-            </button>
-            <button [routerLink]="'/projects/handle/' + project.id" pButton label="Editar" icon="pi pi-pencil" class="p-button-warning">
-            </button>
-          </div>
-        </ng-template>
-      </p-card>
+  @if ((isLoading$ | async)===false) {
+    <div class="project-row p-d-flex p-jc-center p-ai-center">
+      @for (project of projects$ | async; track project.id) {
+        <div class="p-card">
+          <p-card class="p-mb-3">
+            <button
+              pButton
+              icon="pi pi-trash"
+              class="p-button-danger p-button-rounded delete-button"
+              (click)="confirmDelete(project.id)"
+            ></button>
+
+            <ng-template pTemplate="header">
+              <div class="project-header" style="position: relative">
+                {{ project.name }}
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <p>{{ project.description || 'Descripción' }}</p>
+              <p>
+                <b>company: </b
+                ><span class="company">{{ project.company.name }}</span>
+              </p>
+              <p><b>web: </b>{{ project.website }}</p>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <div class="p-d-flex">
+                <button
+                  [routerLink]="'/tasks/list/' + project.id"
+                  pButton
+                  label="Ver"
+                  icon="pi pi-list"
+                  class="p-button-secondary"
+                ></button>
+                <button
+                  [routerLink]="'/projects/handle/' + project.id"
+                  pButton
+                  label="Editar"
+                  icon="pi pi-pencil"
+                  class="p-button-warning"
+                ></button>
+              </div>
+            </ng-template>
+          </p-card>
+        </div>
+      }
     </div>
-    }
-  </div>
-  }
-  @else{
-  <p-progressSpinner />
+  } @else {
+    <app-skeleton />
   }
 </div>
 
-<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle" acceptLabel="Sí" rejectLabel="No"></p-confirmDialog>
+<p-confirmDialog
+  header="Confirmación"
+  icon="pi pi-exclamation-triangle"
+  acceptLabel="Sí"
+  rejectLabel="No"
+></p-confirmDialog>
 
 <p-toast [life]="1500" />

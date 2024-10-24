@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectI } from '../../models/project.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-project-form',
   templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss']
+  styleUrls: ['./project-form.component.scss'],
 })
 export class ProjectFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -16,11 +16,11 @@ export class ProjectFormComponent implements OnInit {
   protected projectService = inject(ProjectService);
   private messageService = inject(MessageService);
   protected projectForm!: FormGroup;
-  protected isEdit: boolean = false;
+  protected isEdit = false;
   private projectId!: string;
 
   ngOnInit(): void {
-    this.projectId = this.route.snapshot.paramMap.get('projectId') !;
+    this.projectId = this.route.snapshot.paramMap.get('projectId')!;
     if (this.projectId) {
       this.isEdit = true;
       const project = this.projectService.getById(this.projectId);
@@ -28,18 +28,16 @@ export class ProjectFormComponent implements OnInit {
     } else {
       this.initForm();
     }
-
   }
 
-
-  initForm(project ? : ProjectI) {
+  initForm(project?: ProjectI) {
     this.projectForm = this.fb.group({
       id: [project?.id || crypto.randomUUID()],
       name: [project?.name || '', Validators.required],
       email: [project?.email || 'bcadavid@gmail.com', Validators.email],
       description: [project?.description || ''],
       website: [project?.website || 'www.incloud.com'],
-      company: [project?.company || { name: "incloud" }]
+      company: [project?.company || { name: 'incloud' }],
     });
   }
 
@@ -52,7 +50,7 @@ export class ProjectFormComponent implements OnInit {
           severity: 'success',
           summary: 'Operación exitosa',
           detail: 'Proyecto actualizado',
-          life: 1500
+          life: 1500,
         });
       } else {
         this.projectService.insert(project);
@@ -60,10 +58,9 @@ export class ProjectFormComponent implements OnInit {
           severity: 'success',
           summary: 'Operación exitosa',
           detail: 'Proyecto creado',
-          life: 1500
+          life: 1500,
         });
       }
-
 
       setTimeout(() => {
         this.router.navigate(['/projects/list']);

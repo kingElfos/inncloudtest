@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private isAuthenticated = false;
 
-  get isbrowser(){
-    return typeof window !=='undefined'
+  get isbrowser() {
+    return typeof window !== 'undefined';
   }
 
   login(username: string, password: string): boolean {
-
-
     if (username === 'innclod' && password === 'somepassword') {
       this.isAuthenticated = true;
       this.isbrowser && localStorage.setItem('isAuthenticated', 'true');
@@ -27,11 +25,9 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    if(this.isbrowser){
+    if (this.isbrowser) {
       return localStorage.getItem('isAuthenticated') === 'true';
     }
     return false;
   }
-
-  
 }
