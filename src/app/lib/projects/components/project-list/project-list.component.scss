@@ -3,7 +3,8 @@
   background: linear-gradient(to bottom right, #FFFFFF, #E6D18F);
 }
 
-.project-header{
+.project-header {
+  max-width:200px; 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -12,9 +13,10 @@
   font-size: 20px
 }
 
-.company{
+.company {
   font-size: 12px;
 }
+
 .add-project-button {
   position: sticky;
   top: 10px;
@@ -30,16 +32,26 @@ h1 {
 
 .project-row {
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   justify-content: center;
-  gap:0.5rem;
+  gap: 0.5rem;
 }
 
 .p-card {
+  position: relative;
   min-width: 250px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.p-button-secondary{
+.delete-button {
+  width: 25px;
+  height: 25px;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.p-button-secondary {
   margin-right: 10px;
 }

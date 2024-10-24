@@ -3,16 +3,8 @@ import { ProjectService } from '../../services/project.service';
 import {ProjectI} from '../../models/project.model';
 import {BehaviorSubject} from 'rxjs';
 import { Router } from '@angular/router';
-
-  // Crear y Editar Proyectos/Tareas: Crea formularios reactivos que permitan añadir y editar
-  // proyectos/tareas. Debes incluir validaciones en los formularios:
-  // ● Los títulos deben ser obligatorios.
-  // ● El estado de las tareas debe representarse como un checkbox (completado o no).
-  // ● Los formularios deben ser modulares y reutilizables.
-  // 5. Eliminar Proyectos/Tareas con Modales: Implementa un modal para confirmar la eliminación de
-  // un proyecto o tarea. Usa una librería como Angular Material o PrimeNG para gestionar los modales.
-  // 
-
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-project-list',
@@ -21,9 +13,28 @@ import { Router } from '@angular/router';
 })
 export class ProjectListComponent{
   
-  protected projectService = inject(ProjectService);
+  private projectService = inject(ProjectService);
+  private confirmationService=inject(ConfirmationService); 
+  private messageService=inject(MessageService);
+  private router = inject(Router);
   protected projects$:BehaviorSubject<ProjectI[]> = this.projectService.projects$;
-  protected router = inject(Router);
   protected isLoading=false;
+
+
+
+  confirmDelete(id:string) {
+    this.confirmationService.confirm({
+      message: '¿Estás seguro de que deseas eliminar este proyecto?',
+      header: 'Confirmación de eliminación',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.projectService.delete(id);
+        this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'El proyecto fue eliminado con éxito' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'info', summary: 'Cancelado', detail: 'La eliminación fue cancelada' });
+      }
+    });
+  }
  
 }

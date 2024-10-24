@@ -69,6 +69,11 @@ export class ProjectService {
       this.update(projects)
     }
   }
+  public delete(id: string) {
+    const projects = this.projects$.value;
+    const updatedProjects = projects.filter((project) => project.id !== id);
+    this.update(updatedProjects);
+  }
 
   public getById(id: string) {
     const projects = this.projects$.value;
@@ -80,7 +85,7 @@ export class ProjectService {
     this.setLsProjects(projects);
   }
 
-  private setLsProjects(projects:ProjectI[]) {
+  private setLsProjects(projects: ProjectI[]) {
     if (this.isbrowser) {
       localStorage.setItem("projects", JSON.stringify(projects))
     }
