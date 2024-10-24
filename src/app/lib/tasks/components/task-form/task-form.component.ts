@@ -23,7 +23,6 @@ export class TaskFormComponent implements OnInit {
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('projectId')!;
     this.taskId = this.route.snapshot.paramMap.get('taskId')!;
-    console.log(this.taskId, this.projectId)
     if (this.projectId && this.taskId) {
       this.isEdit = true;
       const task = this.taskService.getById(this.taskId);

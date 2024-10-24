@@ -42,6 +42,7 @@ export class TaskService {
     }
 
   }
+  //here get task but by projects
 
   getTasksFiltered() {
     const tasks = this.getTasksLs().filter((tsk: TaskI) => tsk.id == this.projectId);

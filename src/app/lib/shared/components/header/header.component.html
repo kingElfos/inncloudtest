@@ -1,0 +1,8 @@
+<p-menubar>
+  <div class="header-left">
+    <a [routerLink]="['/projects/list']" class="header-title">Home</a>
+  </div>
+  <div class="header-right">
+    <button routerLink="/auth/login" pButton type="button" icon="pi pi-sign-out" label="Logout" class="p-button-danger" (click)="logout()"></button>
+  </div>
+</p-menubar>
