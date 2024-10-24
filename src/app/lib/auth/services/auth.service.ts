@@ -6,10 +6,16 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private isAuthenticated = false;
 
+  get isbrowser(){
+    return typeof window !=='undefined'
+  }
+
   login(username: string, password: string): boolean {
+
+
     if (username === 'innclod' && password === 'somepassword') {
       this.isAuthenticated = true;
-      localStorage.setItem('isAuthenticated', 'true');
+      this.isbrowser && localStorage.setItem('isAuthenticated', 'true');
       return true;
     }
     return false;
@@ -17,10 +23,15 @@ export class AuthService {
 
   logout() {
     this.isAuthenticated = false;
-    localStorage.removeItem('isAuthenticated');
+    this.isbrowser && localStorage.removeItem('isAuthenticated');
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('isAuthenticated') === 'true';
+    if(this.isbrowser){
+      return localStorage.getItem('isAuthenticated') === 'true';
+    }
+    return false;
   }
+
+  
 }
