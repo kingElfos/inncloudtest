@@ -1,8 +1,6 @@
 .project-list-container {
   padding: 20px;
   background: linear-gradient(to bottom right, #FFFFFF, #E6D18F);
-  width: 100%;
-  height: 100%;
 }
 
 .project-header{
@@ -31,6 +29,7 @@ h1 {
 .project-row {
   display: flex;
   flex-wrap:wrap;
+  justify-content: center;
   gap:0.5rem;
 }
 

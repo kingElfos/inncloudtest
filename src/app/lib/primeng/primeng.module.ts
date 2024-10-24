@@ -7,15 +7,18 @@ import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
   providers:[MessageService],
   exports:[
+    ProgressSpinnerModule,
     InputTextModule,
     PasswordModule,
     ButtonModule,
     MessageModule,
     TableModule,
     CheckboxModule,
-    CardModule]
+    CardModule
+    ]
 })
 export class PrimengModule { }

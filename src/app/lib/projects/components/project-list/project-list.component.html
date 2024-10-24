@@ -1,36 +1,33 @@
 <div class="project-list-container">
-  
   <div class="add-project-button">
     <button pButton label="Añadir Proyecto" icon="pi pi-plus" class="p-button-raised p-button-primary" (click)="addProject()"></button>
   </div>
-
-
   <h1 class="p-mb-4">Lista de Proyectos</h1>
-
+  @if(!isLoading){
   <div class="project-row p-d-flex p-jc-center p-ai-center">
-    <div class="p-card" *ngFor="let project of projects">
-      <p-card  subheader="ID: {{ project.id }}" class="p-mb-3">
-
+    @for(project of projects$| async; track project.id){
+    <div class="p-card">
+      <p-card subheader="ID: {{ project.id }}" class="p-mb-3">
         <ng-template pTemplate="header">
           <div class="project-header">
             {{ project.name }}
           </div>
         </ng-template>
-
         <ng-template pTemplate="content">
           <p>{{ project.description || "Descripción" }}</p>
         </ng-template>
-
         <ng-template pTemplate="footer">
           <div class="p-d-flex">
-            
             <button pButton label="Ver" icon="pi pi-list" class="p-button-secondary" (click)="viewTasks(project.id)"></button>
-
-
             <button pButton label="Editar" icon="pi pi-pencil" class="p-button-warning" (click)="editProject(project.id)"></button>
           </div>
         </ng-template>
       </p-card>
     </div>
+    }
   </div>
+  }
+  @else{
+  <p-progressSpinner />
+  }
 </div>
