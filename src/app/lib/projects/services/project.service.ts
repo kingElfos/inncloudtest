@@ -17,18 +17,18 @@ export class ProjectService {
   private http=inject(HttpClient);
 
   constructor(){
-     this.loadProjects();
+     this.load();
   }
 
-  private loadProjects() {
-    this.getProjects().subscribe({
+  private load() {
+    this.get().subscribe({
       next: (projects) => this.projects$.next(projects),
       error: (error) => this.errorHandler.handleError(error)
     });
   }
   
 
-  getProjects():Observable<ProjectI[]>{
+  public get():Observable<ProjectI[]>{
     return this.http.get<ProjectI[]>(this.apiUrl).pipe(
       catchError((error: HttpErrorResponse) => {
         this.errorHandler.handleError(error);
@@ -36,4 +36,23 @@ export class ProjectService {
       })
     );
   }
+  
+  public insert(project:ProjectI){
+    const projects=this.projects$.value;
+    projects.unshift(project)
+    this.update(projects)
+  }
+
+  public put(index:number, project:ProjectI){
+    const projects=this.projects$.value;
+    projects[index]=project;
+    this.update(projects)
+
+  }
+
+  private update(projects:ProjectI[]){
+    this.projects$.next(projects);
+  }
+
+  
 }

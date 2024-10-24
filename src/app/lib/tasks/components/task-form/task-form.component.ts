@@ -11,7 +11,7 @@ export class TaskFormComponent implements OnInit {
   private fb=inject(FormBuilder);
   protected taskForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
