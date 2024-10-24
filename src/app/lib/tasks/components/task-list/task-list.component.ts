@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject,OnInit,AfterViewInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { TaskService } from '../../services/task.service';
 import { BehaviorSubject} from 'rxjs';
@@ -11,15 +11,25 @@ import { MessageService } from 'primeng/api';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent {
+export class TaskListComponent implements OnInit{
 
+
+  
 
   private taskService = inject(TaskService);
   private confirmationService = inject(ConfirmationService);
   private messageService = inject(MessageService);
+  private route=inject(ActivatedRoute);
   private router = inject(Router);
   protected tasks$: BehaviorSubject < TaskI[] > = this.taskService.tasks$;
   protected isLoading = false;
+
+
+  ngOnInit(){
+    const taskId = this.route.snapshot.paramMap.get('projectId')!;
+    this.taskService.load(taskId);
+  }
+
 
 
 

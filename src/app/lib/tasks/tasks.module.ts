@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import {PrimengModule} from '../primeng/primeng.module';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TasksRoutingModule } from './routing/tasks-routing.module';
+import { HttpErrorHandlerService } from '../shared/services/http-error-handler.service';
 import { FormsModule} from '@angular/forms';
+import {TaskService} from './services/task.service';
 
 @NgModule({
   declarations: [TaskListComponent],
@@ -12,6 +14,7 @@ import { FormsModule} from '@angular/forms';
     TasksRoutingModule,
     FormsModule,
     PrimengModule
-  ]
+  ],
+  providers:[HttpErrorHandlerService,TaskService]
 })
 export class TasksModule { }

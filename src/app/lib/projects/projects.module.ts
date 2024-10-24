@@ -7,7 +7,6 @@ import {ProjectFormComponent} from './components/project-form/project-form.compo
 import { ProjectsRoutingModule } from './routing/projects-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { HttpErrorHandlerService } from '../shared/services/http-error-handler.service';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [ProjectListComponent,ProjectFormComponent],
   imports: [
