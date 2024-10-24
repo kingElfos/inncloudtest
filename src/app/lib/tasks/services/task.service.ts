@@ -49,7 +49,9 @@ export class TaskService {
   }
 
   getAllTasks(): Observable < TaskI[] > {
-    return this.http.get < TaskI[] > (this.apiUrl);
+    return this.http.get < TaskI[] > (this.apiUrl).pipe((map((tasks)=>{
+      return tasks.map((tsk:TaskI)=>({...tsk,taskId:crypto.randomUUID()}))
+    })));
   }
 
   public insert(task: TaskI) {
@@ -58,19 +60,22 @@ export class TaskService {
     this.updateTasksLs(tasks);
   }
 
-  public put(id: string, task: TaskI) {
+  public put(taskId: string, task: TaskI, reload=false) {
     const tasks = this.getTasksLs();
-    const index = tasks.findIndex((tsk: TaskI) => tsk.id == id);
+    const index = tasks.findIndex((tsk: TaskI) => tsk.taskId == taskId);
     if (index !== -1) {
       tasks[index] = task;
-      this.updateTasksLs(tasks);
+      if(reload){
+        this.updateTasksLs(tasks);
+      }
+      
     }
   }
 
   // delete task on local storage
-  public delete(id: string) {
+  public delete(taskId: string) {
     const tasks = this.getTasksLs();
-    const updatedtasks = tasks.filter((task:TaskI) => task.id !== id);
+    const updatedtasks = tasks.filter((task:TaskI) => task.taskId !== taskId);
     this.updateTasksLs(updatedtasks);
   }
 
@@ -106,9 +111,9 @@ export class TaskService {
 
 
   //get task by id on the local storage
-  public getById(id: string) {
+  public getById(taskId: string) {
     const tasks = this.getTasksLs();
-    return tasks.find((task:TaskI) => task.id == id);
+    return tasks.find((task:TaskI) => task.taskId == taskId);
   }
 
 }

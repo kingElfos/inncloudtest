@@ -1,6 +1,6 @@
 <div class="task-list">
   <h2 class="p-text-center p-mb-4">Lista de Tareas</h2>
-  <div class="p-d-flex p-jc-end p-mb-2 btn-add">
+  <div [routerLink]="'/tasks/handle/'+projectId" class="p-d-flex p-jc-end p-mb-2 btn-add">
     <button pButton label="Agregar Tarea" icon="pi pi-plus" class="p-button-success"></button>
   </div>
   <ng-container *ngIf="tasks$| async as tasks">
@@ -16,15 +16,15 @@
     </ng-template>
     <ng-template pTemplate="body" let-task>
       <tr>
-        <td class="p-text-center">{{ task.id }}</td>
+        <td class="p-text-center">{{ task.taskId }}</td>
         <td class="p-text-center text-ellipsis">{{ task.title }}</td>
         <td class="p-text-center">
           <p-checkbox [(ngModel)]="task.completed" binary="true" (onChange)="updateTaskStatus(task)"></p-checkbox>
         </td>
         <td class="p-text-center">
-          <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-warning p-button-text"></button>
+          <button [routerLink]="'/tasks/handle/'+projectId+'/'+task.taskId"  pButton icon="pi pi-pencil" class="p-button-rounded p-button-warning p-button-text"></button>
           <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" 
-          (click)="confirmDelete(task.id)"></button>
+          (click)="confirmDelete(task.taskId)"></button>
         </td>
       </tr>
     </ng-template>

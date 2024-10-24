@@ -23,11 +23,13 @@ export class TaskListComponent implements OnInit{
   private router = inject(Router);
   protected tasks$: BehaviorSubject < TaskI[] > = this.taskService.tasks$;
   protected isLoading = false;
+  public projectId!:string;
 
 
   ngOnInit(){
-    const taskId = this.route.snapshot.paramMap.get('projectId')!;
-    this.taskService.load(taskId);
+    const projectId = this.route.snapshot.paramMap.get('projectId')!;
+    this.projectId=projectId;
+    this.taskService.load(projectId);
   }
 
 
@@ -52,7 +54,7 @@ export class TaskListComponent implements OnInit{
 
 
   updateTaskStatus(task:TaskI){
-    this.taskService.put(task.id, task);
+    this.taskService.put(task.taskId, task);
   }
  
 
