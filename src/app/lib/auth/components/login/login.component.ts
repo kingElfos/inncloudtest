@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       if (this.authService.login(username, password)) {
         this.router.navigate(['/projects']);
       } else {
-        // Manejo de error si las credenciales son incorrectas
+        alert("clave incorrecta")
       }
     }
   }

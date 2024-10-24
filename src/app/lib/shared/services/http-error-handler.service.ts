@@ -12,13 +12,7 @@ export class HttpErrorHandlerService {
   handleError(error: HttpErrorResponse) {
     let errorMessage: string;
 
-    if (error.error instanceof ErrorEvent) {
-      // Error en el lado del cliente
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Error en el lado del servidor
-      errorMessage = `Código de error: ${error.status}, Mensaje: ${error.message}`;
-    }
+    errorMessage = error.error.message;
 
 
     this.messageService.add({

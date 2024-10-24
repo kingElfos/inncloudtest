@@ -13,7 +13,6 @@ import {PrimengModule} from '../primeng/primeng.module';
     ReactiveFormsModule,
     AuthRoutingModule,
     PrimengModule
-    
   ],
   providers:[AuthService]
 })
