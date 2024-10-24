@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TaskService {
   private apiUrl = 'https://jsonplaceholder.typicode.com/todos';
 
-  public tasks$ = new BehaviorSubject < TaskI[] > ([]);
+  public tasks$ = new BehaviorSubject<TaskI[]>([]);
   private errorHandler = inject(HttpErrorHandlerService);
   private http = inject(HttpClient);
   private route = inject(ActivatedRoute);
@@ -48,8 +48,8 @@ export class TaskService {
     this.tasks$.next(tasks);
   }
 
-  getAllTasks(): Observable < TaskI[] > {
-    return this.http.get < TaskI[] > (this.apiUrl).pipe(
+  getAllTasks(): Observable<TaskI[]> {
+    return this.http.get<TaskI[]>(this.apiUrl).pipe(
       map((tasks) => {
         return tasks.map((tsk: TaskI) => ({
           ...tsk,

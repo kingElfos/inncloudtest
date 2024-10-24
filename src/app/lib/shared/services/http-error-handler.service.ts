@@ -9,7 +9,7 @@ export class HttpErrorHandlerService {
   private messageService = inject(MessageService);
 
   handleError(error: HttpErrorResponse) {
-    const errorMessage:string= error.error.message;
+    const errorMessage: string = error.error.message;
     this.messageService.add({
       severity: 'error',
       summary: 'Error en la petición',

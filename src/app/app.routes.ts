@@ -21,6 +21,11 @@ export const routes: Routes = [
           import('./lib/tasks/tasks.module').then((m) => m.TasksModule),
         canActivate: [AuthGuard],
       },
+      {
+        path:'',
+        redirectTo:'projects',
+        pathMatch:'full'
+      }
     ],
   },
   {
@@ -30,7 +35,7 @@ export const routes: Routes = [
   },
 
   {
-    path: '',
+    path: '**',
     pathMatch: 'full',
     redirectTo: '/projects',
   },

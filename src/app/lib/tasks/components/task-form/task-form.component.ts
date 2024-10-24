@@ -1,4 +1,4 @@
-import { Component,OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaskI } from '../../models/task.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-task-form',
   templateUrl: './task-form.component.html',
+  styleUrls: ['./task-form.component.scss'],
 })
 export class TaskFormComponent implements OnInit {
   private fb = inject(FormBuilder);

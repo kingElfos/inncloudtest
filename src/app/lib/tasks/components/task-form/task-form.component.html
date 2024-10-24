@@ -1,40 +1,44 @@
-<p-card [header]="isEdit ? 'Editar tarea' : 'Crear tarea'">
-  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-    <div class="p-field">
-      <label for="title">Título</label>
-      <input
-        id="title"
-        pInputText
-        formControlName="title"
-        placeholder="Ingresa el título de la tarea"
-      />
-      <p-messages
-        severity="error"
-        *ngIf="
-          taskForm.get('title')?.hasError('required') &&
-          taskForm.get('title')?.touched
-        "
-      >
-        <ng-template pTemplate>
-          <div class="ml-2">El título es obligatorio</div>
-        </ng-template>
-      </p-messages>
-    </div>
+<p-toast [life]="1500" />
+<div class="custom-card">
+  <p-card [header]="isEdit ? 'Editar tarea' : 'Crear tarea'">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
+      <div class="p-field">
+        <label for="title">Título</label>
+        <input
+          id="title"
+          pInputText
+          formControlName="title"
+          placeholder="Ingresa el título de la tarea"
+          class="custom-input"
+        />
+        <p-messages
+          severity="error"
+          *ngIf="
+            taskForm.get('title')?.hasError('required') &&
+            taskForm.get('title')?.touched
+          "
+        >
+          <ng-template pTemplate>
+            <div class="ml-2">El título es obligatorio</div>
+          </ng-template>
+        </p-messages>
+      </div>
 
-    <div class="p-field-checkbox">
-      <p-checkbox
-        formControlName="completed"
-        binary="true"
-        label="Completado"
-      ></p-checkbox>
-    </div>
+      <div class="p-field-checkbox">
+        <p-checkbox
+          formControlName="completed"
+          binary="true"
+          label="Completado"
+        ></p-checkbox>
+      </div>
 
-    <button
-      pButton
-      label="Guardar"
-      type="submit"
-      class="p-button-raised p-button-primary"
-      [disabled]="taskForm.invalid"
-    ></button>
-  </form>
-</p-card>
+      <button
+        pButton
+        label="Guardar"
+        type="submit"
+        class="p-button-raised p-button-primary custom-button"
+        [disabled]="taskForm.invalid"
+      ></button>
+    </form>
+  </p-card>
+</div>
