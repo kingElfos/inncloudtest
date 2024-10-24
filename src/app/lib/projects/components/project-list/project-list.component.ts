@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
-
+import { Router } from '@angular/router';
 interface Project {
   id: number;
   name: string;
@@ -14,11 +14,11 @@ interface Project {
 })
 export class ProjectListComponent implements OnInit {
   protected projects: Project[] = [];
-  protected projectService=inject(projectService);
-
+  protected projectService=inject(ProjectService);
+  protected router=inject(Router);
   ngOnInit(): void {
     this.projectService.getProjects().subscribe((data) => {
-      this.projects = data.map(user => ({
+      this.projects = data.map((user) => ({
         id: user.id,
         name: user.name,
         email: user.email

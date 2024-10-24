@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {map} from 'rxjs/operators';
 
 interface Todo {
   id: number;
@@ -18,7 +19,7 @@ export class TaskService {
 
   getTasks(projectId: number): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.apiUrl).pipe(
-      map((todos: Todo[]) => todos.filter(todo => todo.userId === projectId))
+      map((todos: Todo[]) => todos.filter(todo => todo.id === projectId))
     );
   }
 }
