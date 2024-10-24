@@ -1,3 +1,5 @@
+<p-toast />
+
 <div class="custom-card">
   <p-card [header]="isEdit ? 'Editar proyecto' : 'Crear proyecto'">
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
@@ -10,6 +12,7 @@
         placeholder="Ingresa el título del proyecto"
         class="custom-input"
       />
+      {{projectForm.get('name')?.invalid && projectForm.get('name')?.touched}}
       <p-messages
         *ngIf="projectForm.get('name')?.invalid && projectForm.get('name')?.touched"
         severity="error"
