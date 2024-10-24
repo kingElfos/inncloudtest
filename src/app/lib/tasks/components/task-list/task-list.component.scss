@@ -1,7 +1,14 @@
 .task-list {
   background: linear-gradient(to bottom right, #FFFFFF, #E6D18F);
-  margin: 10px;
+  height: 100%;
   overflow: hidden;
+  position: relative;
+  padding: 20px;
+}
+.btn-add{
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 .task-completed {

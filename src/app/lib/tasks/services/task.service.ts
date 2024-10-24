@@ -15,6 +15,7 @@ export class TaskService {
   private errorHandler = inject(HttpErrorHandlerService);
   private http = inject(HttpClient);
   private route = inject(ActivatedRoute);
+  private projectId!: string;
 
 
 
@@ -22,10 +23,12 @@ export class TaskService {
     return typeof window !== 'undefined'
   }
 
-  public load(taskId:string) {
+  public load(projectId: string) {
     //thats's  for preserve data and can look changes on the tasks and not overwrite
     //with the data of the API
     //the data api only is charged when is the first session
+
+    this.projectId = projectId;
 
     if (this.isbrowser) {
       const localTasks = localStorage.getItem('tasks');
@@ -34,68 +37,83 @@ export class TaskService {
           this.setLstasks(tasks)
         })
       } else {
-        const taskFiltered=this.get(taskId);
-        this.tasks$.next(taskFiltered);
-        
+        this.getTasksFiltered();
       }
     }
 
   }
 
-
-
-
-  get(projectId: string): TaskI[] {
-    if (this.isbrowser) {
-      const tasksLocal = localStorage.getItem("tasks");
-      if (tasksLocal) {
-        const tasks = JSON.parse(tasksLocal);
-        return tasks.filter((tsk:TaskI) => tsk.id == projectId);
-      }
-
-    }
-
-    return [];
+  getTasksFiltered() {
+    const tasks = this.getTasksLs().filter((tsk: TaskI) => tsk.id == this.projectId);
+    this.tasks$.next(tasks);
   }
 
   getAllTasks(): Observable < TaskI[] > {
     return this.http.get < TaskI[] > (this.apiUrl);
   }
+
   public insert(task: TaskI) {
-    const tasks = this.tasks$.value;
+    const tasks = this.getTasksLs();
     tasks.unshift(task)
-    this.update(tasks)
+    this.updateTasksLs(tasks);
   }
 
   public put(id: string, task: TaskI) {
-    const tasks = this.tasks$.value;
-    const index = tasks.findIndex((pr) => pr.id == id);
+    const tasks = this.getTasksLs();
+    const index = tasks.findIndex((tsk: TaskI) => tsk.id == id);
     if (index !== -1) {
       tasks[index] = task;
-      this.update(tasks)
+      this.updateTasksLs(tasks);
     }
   }
+
+  // delete task on local storage
   public delete(id: string) {
-    const tasks = this.tasks$.value;
-    const updatedtasks = tasks.filter((task) => task.id !== id);
-    this.update(updatedtasks);
+    const tasks = this.getTasksLs();
+    const updatedtasks = tasks.filter((task:TaskI) => task.id !== id);
+    this.updateTasksLs(updatedtasks);
   }
 
-  public getById(id: string) {
-    const tasks = this.tasks$.value;
-    return tasks.find((task) => task.id == id);
+  //methods for handle tasks in the localstorage
+
+  //get all tasks local storage
+  public getTasksLs() {
+    if (this.isbrowser) {
+      const tasksLocal = localStorage.getItem("tasks");
+      if (tasksLocal) {
+        return JSON.parse(tasksLocal);
+      }
+    }
+    return [];
   }
 
-  private update(tasks: TaskI[]) {
-    this.tasks$.next(tasks);
-    this.setLstasks(tasks);
-  }
+  //assign tasks on local storage
 
   private setLstasks(tasks: TaskI[]) {
     if (this.isbrowser) {
       localStorage.setItem("tasks", JSON.stringify(tasks))
     }
   }
+
+  //update tasks on local storage
+
+  public updateTasksLs(tasks: TaskI[]) {
+    if (this.isbrowser) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      this.getTasksFiltered();
+    }
+  }
+
+
+  //get task by id on the local storage
+  public getById(id: string) {
+    const tasks = this.getTasksLs();
+    return tasks.find((task:TaskI) => task.id == id);
+  }
+
+
+
+
 
 
 }

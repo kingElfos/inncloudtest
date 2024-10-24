@@ -50,8 +50,7 @@ export class TaskListComponent implements OnInit{
 
 
   updateTaskStatus(task:TaskI){
-
-  
+    this.taskService.put(task.id, task);
   }
  
 
