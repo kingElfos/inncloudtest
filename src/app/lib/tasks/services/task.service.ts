@@ -61,15 +61,23 @@ export class TaskService {
     this.updateTasksLs(tasks);
   }
 
-  public put(taskId: string, task: TaskI, reload=false) {
+  public put(taskId: string, task: TaskI) {
     const tasks = this.getTasksLs();
     const index = tasks.findIndex((tsk: TaskI) => tsk.taskId == taskId);
     if (index !== -1) {
       tasks[index] = task;
+      this.updateTasksLs(tasks,false);
+    }
+  }
+
+
+  public updateTasksLs(tasks: TaskI[],reload=true) {
+    if (this.isbrowser) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
       if(reload){
-        this.updateTasksLs(tasks);
+         this.getTasksFiltered();
       }
-      
+     
     }
   }
 
@@ -103,12 +111,7 @@ export class TaskService {
 
   //update tasks on local storage
 
-  public updateTasksLs(tasks: TaskI[]) {
-    if (this.isbrowser) {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      this.getTasksFiltered();
-    }
-  }
+  
 
 
   //get task by id on the local storage
