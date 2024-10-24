@@ -11,8 +11,8 @@ import { HttpErrorHandlerService } from '../../shared/services/http-error-handle
   providedIn: 'root'
 })
 export class ProjectService {
-  public projects$ = new BehaviorSubject < ProjectI[] > ([]);
   private apiUrl = 'https://jsonplaceholder.typicode.com/users';
+  public projects$ = new BehaviorSubject < ProjectI[] > ([]);
   private errorHandler = inject(HttpErrorHandlerService);
   private http = inject(HttpClient);
 

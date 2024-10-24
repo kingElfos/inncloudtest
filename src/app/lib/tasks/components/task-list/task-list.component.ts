@@ -1,12 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../../services/task.service';
+import {Task} from '../../models/task.model';
 
-interface Task {
-  id: number;
-  title: string;
-  completed: boolean;
-}
 
 @Component({
   selector: 'app-task-list',
@@ -28,7 +24,6 @@ export class TaskListComponent implements OnInit {
 
 
   updateTaskStatus(task: Task) {
-  
     console.log(`Tarea ${task.id} actualizada:`, task.completed);
   }
 
