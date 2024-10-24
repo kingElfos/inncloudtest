@@ -1,34 +1,49 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute,Router } from '@angular/router';
 import { TaskService } from '../../services/task.service';
-import {Task} from '../../models/task.model';
-
+import { BehaviorSubject} from 'rxjs';
+import { TaskI } from '../../models/task.model';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent implements OnInit {
-  protected tasks: Task[] = [];
-  protected route=inject(ActivatedRoute);
-  protected taskService=inject(TaskService)
+export class TaskListComponent {
 
 
-  ngOnInit(): void {
-    const projectId = +this.route.snapshot.paramMap.get('projectId')!;
-    this.taskService.getTasks(projectId).subscribe((data) => {
-      this.tasks = data;
+  private taskService = inject(TaskService);
+  private confirmationService = inject(ConfirmationService);
+  private messageService = inject(MessageService);
+  private router = inject(Router);
+  protected tasks$: BehaviorSubject < TaskI[] > = this.taskService.tasks$;
+  protected isLoading = false;
+
+
+
+  confirmDelete(id: string) {
+    this.confirmationService.confirm({
+      message: '¿Estás seguro de que deseas eliminar esta tarea?',
+      header: 'Confirmación de eliminación',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.taskService.delete(id);
+        this.messageService.add({ severity: 'success', summary: 'Eliminado', detail: 'la tarea fue eliminada con éxito' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'info', summary: 'Cancelado', detail: 'La eliminación fue cancelada' });
+      }
     });
   }
 
 
-  updateTaskStatus(task: Task) {
-    console.log(`Tarea ${task.id} actualizada:`, task.completed);
-  }
+  updateTaskStatus(task:TaskI){
 
-  deleteTask(taskId: number) {
-    this.tasks = this.tasks.filter(task => task.id !== taskId);
-    console.log(`Tarea con ID ${taskId} eliminada.`);
+  
   }
+ 
+
+
 }

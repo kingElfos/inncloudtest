@@ -1,5 +1,5 @@
-export interface Task {
-  id: number;
+export interface TaskI {
+  id: string;
   title: string;
   completed: boolean;
 }
