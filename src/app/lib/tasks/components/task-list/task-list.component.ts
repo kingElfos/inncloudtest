@@ -34,6 +34,8 @@ export class TaskListComponent implements OnInit{
 
 
   confirmDelete(id: string) {
+
+    console.log(id)
     this.confirmationService.confirm({
       message: '¿Estás seguro de que deseas eliminar esta tarea?',
       header: 'Confirmación de eliminación',
