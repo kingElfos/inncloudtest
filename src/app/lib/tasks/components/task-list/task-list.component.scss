@@ -1,0 +1,28 @@
+.task-list {
+  margin: 20px;
+}
+
+.task-completed {
+  color: green; /* Color para tareas completadas */
+  font-weight: bold;
+}
+
+.task-not-completed {
+  color: red; /* Color para tareas no completadas */
+  font-weight: bold;
+}
+
+/* Para un estilo más atractivo en la tabla */
+.p-datatable {
+  border: 1px solid #ddd;
+}
+
+.p-datatable th {
+  background-color: #EA2E25; /* Color de fondo del encabezado */
+  color: white;
+  text-align: left;
+}
+
+.p-datatable td {
+  padding: 10px;
+}

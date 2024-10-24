@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ProjectsRoutingModule } from './projects-routing.module';
+import { ProjectService } from './services/project.service';
+import { ProjectListComponent } from './components/project-list/project-list.component';
+import { ProjectsRoutingModule } from './routing/projects-routing.module';
+import { PrimengModule } from '../primeng/primeng.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ProjectListComponent],
   imports: [
     CommonModule,
-    ProjectsRoutingModule
-  ]
+    ProjectsRoutingModule,
+    PrimengModule
+  ],
+  providers: [ProjectService]
 })
-export class ProjectsModule { }
+export class ProjectsModule {}

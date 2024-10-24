@@ -1,0 +1,13 @@
+<div class="project-list">
+  <div class="p-grid">
+    <div class="p-col-12 p-md-6 p-lg-4" *ngFor="let project of projects">
+      <p-card [header]="project.name" [subHeader]="project.email">
+        <p>Proyecto ID: {{ project.id }}</p>
+        <p-footer>
+          <button pButton label="Ver Tareas" (click)="viewTasks(project.id)"></button>
+        </p-footer>
+      </p-card>
+    </div>
+  </div>
+</div>
+
