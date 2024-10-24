@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
-import { MessageModule } from 'primeng/message';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
-import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MessagesModule } from 'primeng/messages';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
 @NgModule({
   providers:[MessageService],
   exports:[
@@ -15,7 +17,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputTextModule,
     PasswordModule,
     ButtonModule,
-    MessageModule,
+    MessagesModule,
+    ToastModule,
     TableModule,
     CheckboxModule,
     CardModule

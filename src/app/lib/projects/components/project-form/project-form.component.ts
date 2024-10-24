@@ -6,7 +6,8 @@ import { ProjectService } from '../../services/project.service';
 import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-project-form',
-  templateUrl: './project-form.component.html'
+  templateUrl: './project-form.component.html',
+  styleUrls: ['./project-form.component.scss']
 })
 export class ProjectFormComponent implements OnInit {
   private fb = inject(FormBuilder);
