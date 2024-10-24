@@ -1,9 +1,9 @@
-<p-card header="Crear/Editar Proyecto">
+<p-card [header]="isEdit ? 'Editar proyecto':'Crear proyecto' ">
   <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
     <div class="p-field">
-      <label for="title">Título</label>
-      <input id="title" pInputText formControlName="title" placeholder="Ingresa el título del proyecto" />
-      <p-message *ngIf="projectForm.get('title')?.invalid && projectForm.get('title')?.touched" severity="error"
+      <label for="name">Título</label>
+      <input id="name" pInputText formControlName="name" placeholder="Ingresa el título del proyecto" />
+      <p-message *ngIf="projectForm.get('name')?.invalid && projectForm.get('name')?.touched" severity="error"
         text="El título es obligatorio"></p-message>
     </div>
 

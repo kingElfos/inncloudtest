@@ -1,8 +1,8 @@
-import { Injectable,inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError} from 'rxjs/operators';
-import {ProjectI} from '../models/project.model';
-import { throwError,of,BehaviorSubject,Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { ProjectI } from '../models/project.model';
+import { throwError, of , BehaviorSubject, Observable } from 'rxjs';
 import { HttpErrorHandlerService } from '../../shared/services/http-error-handler.service';
 
 
@@ -11,13 +11,13 @@ import { HttpErrorHandlerService } from '../../shared/services/http-error-handle
   providedIn: 'root'
 })
 export class ProjectService {
-  public projects$= new BehaviorSubject<ProjectI[]>([]);
+  public projects$ = new BehaviorSubject < ProjectI[] > ([]);
   private apiUrl = 'https://jsonplaceholder.typicode.com/users';
-  private errorHandler=inject(HttpErrorHandlerService);
-  private http=inject(HttpClient);
+  private errorHandler = inject(HttpErrorHandlerService);
+  private http = inject(HttpClient);
 
-  constructor(){
-     this.load();
+  constructor() {
+    this.load();
   }
 
   private load() {
@@ -26,33 +26,42 @@ export class ProjectService {
       error: (error) => this.errorHandler.handleError(error)
     });
   }
-  
 
-  public get():Observable<ProjectI[]>{
-    return this.http.get<ProjectI[]>(this.apiUrl).pipe(
+
+  public get(): Observable < ProjectI[] > {
+    return this.http.get < ProjectI[] > (this.apiUrl).pipe(
       catchError((error: HttpErrorResponse) => {
         this.errorHandler.handleError(error);
         return of([])
       })
     );
   }
-  
-  public insert(project:ProjectI){
-    const projects=this.projects$.value;
+
+  public insert(project: ProjectI) {
+    const projects = this.projects$.value;
     projects.unshift(project)
     this.update(projects)
   }
 
-  public put(index:number, project:ProjectI){
-    const projects=this.projects$.value;
-    projects[index]=project;
-    this.update(projects)
+  public put(id: string, project: ProjectI) {
+    const projects = this.projects$.value;
+    const index = projects.findIndex((pr) => pr.id === id);
+    if (index !== -1) {
+      projects[index] = project;
+      this.update(projects)
+    }
+
 
   }
 
-  private update(projects:ProjectI[]){
+  public getById(id: string) {
+    const projects = this.projects$.value;
+    return projects.find((project) => project.id == id);
+  }
+
+  private update(projects: ProjectI[]) {
     this.projects$.next(projects);
   }
 
-  
+
 }

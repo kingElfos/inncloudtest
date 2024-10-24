@@ -26,21 +26,4 @@ export class ProjectListComponent{
   protected router = inject(Router);
   protected isLoading=false;
  
-
-
-  editProject(projectId: number) {
-    // Lógica para editar el proyecto seleccionado
-  }
-
-  addProject() {
-    // Lógica para añadir un nuevo proyecto
-  }
-
-
-
-
-
-  viewTasks(projectId: number) {
-    this.router.navigate(['/tasks', projectId]);
-  }
 }
