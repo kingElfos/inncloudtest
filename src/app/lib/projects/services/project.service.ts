@@ -77,7 +77,6 @@ export class ProjectService {
 
   private update(projects: ProjectI[]) {
     this.projects$.next(projects);
-    console.log(projects)
     this.setLsProjects(projects);
   }
 

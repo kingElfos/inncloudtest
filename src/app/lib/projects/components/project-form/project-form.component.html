@@ -1,49 +1,23 @@
-<p-toast />
-
+<p-toast [life]="2000" />
 <div class="custom-card">
   <p-card [header]="isEdit ? 'Editar proyecto' : 'Crear proyecto'">
-  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
-    <div class="p-field">
-      <label for="name">Título</label>
-      <input
-        id="name"
-        pInputText
-        formControlName="name"
-        placeholder="Ingresa el título del proyecto"
-        class="custom-input"
-      />
-      {{projectForm.get('name')?.invalid && projectForm.get('name')?.touched}}
-      <p-messages
-        *ngIf="projectForm.get('name')?.invalid && projectForm.get('name')?.touched"
-        severity="error"
-        text="El título es obligatorio"
-        class="error-message"
-      ></p-messages>
-    </div>
-
-    
-
-    <div class="p-field">
-      <label for="description">Descripción</label>
-      <textarea
-        id="description"
-        pInputTextarea
-        formControlName="description"
-        rows="3"
-        class="custom-textarea"
-      ></textarea>
-    </div>
-
-    <button
-      pButton
-      label="Guardar"
-      type="submit"
-      class="p-button-raised p-button-primary custom-button"
-      [disabled]="projectForm.invalid"
-    ></button>
-  </form>
-</p-card>
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
+      <div class="p-field">
+        <label for="name">Título</label>
+        <input id="name" pInputText formControlName="name" placeholder="Ingresa el título del proyecto" class="custom-input" />
+        <p-messages severity="error" 
+        *ngIf="projectForm.get('name')?.hasError('required') && projectForm.get('name')?.touched"
+        >
+          <ng-template pTemplate>
+            <div class="ml-2">El título es obligatorio</div>
+          </ng-template>
+        </p-messages>
+      </div>
+      <div class="p-field">
+        <label for="description">Descripción</label>
+        <textarea id="description" pInputTextarea formControlName="description" rows="3" class="custom-textarea"></textarea>
+      </div>
+      <button pButton label="Guardar" type="submit" class="p-button-raised p-button-primary custom-button" [disabled]="projectForm.invalid"></button>
+    </form>
+  </p-card>
 </div>
-
-
-

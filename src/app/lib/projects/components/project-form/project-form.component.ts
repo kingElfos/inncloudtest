@@ -45,7 +45,6 @@ export class ProjectFormComponent implements OnInit {
   onSubmit() {
     if (this.projectForm.valid) {
       const project = this.projectForm.value;
-      console.log(project)
       if (this.isEdit) {
         this.projectService.put(this.projectId, project);
         this.messageService.add({ severity: 'success', summary: 'Operación exitosa', detail: 'Proyecto actualizado' });
