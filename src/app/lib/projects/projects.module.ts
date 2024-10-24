@@ -4,7 +4,7 @@ import { ProjectService } from './services/project.service';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { ProjectsRoutingModule } from './routing/projects-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
-
+import { HttpErrorHandlerService } from '../shared/services/http-error-handler.service';
 
 @NgModule({
   declarations: [ProjectListComponent],
@@ -13,6 +13,6 @@ import { PrimengModule } from '../primeng/primeng.module';
     ProjectsRoutingModule,
     PrimengModule
   ],
-  providers: [ProjectService]
+  providers: [HttpErrorHandlerService,ProjectService]
 })
 export class ProjectsModule {}

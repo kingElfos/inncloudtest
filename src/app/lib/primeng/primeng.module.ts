@@ -5,9 +5,9 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
-
-
+import { MessageService } from 'primeng/api';
 @NgModule({
+  providers:[MessageService],
   exports:[
     InputTextModule,
     PasswordModule,

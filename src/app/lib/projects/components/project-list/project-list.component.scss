@@ -1,0 +1,43 @@
+.project-list-container {
+  padding: 20px;
+}
+
+.project-header{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 5px;
+  font-weight: bold;
+}
+
+
+.add-project-button {
+  position: sticky;
+  top: 10px;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.project-row {
+  display: flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+
+.p-card {
+  min-width: 250px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.p-card .p-card-footer {
+  display: flex;
+  justify-content: space-between;
+}
