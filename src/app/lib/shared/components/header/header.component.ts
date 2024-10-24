@@ -6,15 +6,21 @@ import { MenubarModule } from 'primeng/menubar';
 @Component({
   selector: 'app-header',
   standalone: true,
-   imports: [RouterModule, CommonModule, ButtonModule, MenubarModule],
+  imports: [RouterModule, CommonModule, ButtonModule, MenubarModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 
+  public items = [{
+    label: 'Home',
+    link:'/projects/list',
+    icon: 'pi pi-home'
+  }]
+
 
   logout() {
-    if(typeof window !=='undefined'){
+    if (typeof window !== 'undefined') {
       localStorage.clear();
     }
   }

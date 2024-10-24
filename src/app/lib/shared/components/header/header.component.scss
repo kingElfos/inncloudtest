@@ -1,20 +1,25 @@
-.header-left {
+.header-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  font-size: 20px;
-  font-weight: bold;
+  padding: 0 1rem; 
+  background-color: #f8f9fa;
+  width: 100vw;
+  overflow: hidden;
 }
 
-.header-title {
-  text-decoration: none;
-  color: inherit;
+.header-left a {
+  font-size: 1.5rem; 
+  color: #333;
+  text-decoration: none; 
 }
 
 .header-right {
-  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
-.p-menubar {
-  background-color: #f8f9fa;
-  padding: 10px;
+.header-right button {
+  margin-left: 1rem; 
 }
+
