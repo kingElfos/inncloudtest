@@ -1,7 +1,7 @@
 <div class="project-list-container">
   <div class="add-project-button">
     <button
-      routerLink="/projects/handle"
+      routerLink="/projects/newproject"
       pButton
       label="Añadir Proyecto"
       icon="pi pi-plus"
@@ -27,12 +27,7 @@
               </div>
             </ng-template>
             <ng-template pTemplate="content">
-              <p>{{ project.description || 'Descripción' }}</p>
-              <p>
-                <b>company: </b
-                ><span class="company">{{ project.company.name }}</span>
-              </p>
-              <p><b>web: </b>{{ project.website }}</p>
+              <p>{{ project.description}}</p>
             </ng-template>
             <ng-template pTemplate="footer">
               <div class="p-d-flex">
@@ -44,7 +39,7 @@
                   class="p-button-secondary"
                 ></button>
                 <button
-                  [routerLink]="'/projects/handle/' + project.id"
+                  [routerLink]="'/projects/editproject/' + project.id"
                   pButton
                   label="Editar"
                   icon="pi pi-pencil"

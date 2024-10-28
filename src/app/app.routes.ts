@@ -33,10 +33,4 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./lib/auth/auth.module').then((m) => m.AuthModule),
   },
-
-  {
-    path: '**',
-    pathMatch: 'full',
-    redirectTo: '/projects',
-  },
 ];

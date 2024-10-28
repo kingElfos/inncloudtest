@@ -7,12 +7,12 @@
       class="project-form"
     >
       <div class="p-field">
-        <label for="name">Título</label>
+        <label for="name">Nombre</label>
         <input
           id="name"
           pInputText
           formControlName="name"
-          placeholder="Ingresa el título del proyecto"
+          placeholder="Ingresa el nombre del proyecto"
           class="custom-input"
         />
         <p-messages
@@ -23,7 +23,7 @@
           "
         >
           <ng-template pTemplate>
-            <div class="ml-2">El título es obligatorio</div>
+            <div class="ml-2">El nombre del proyecto es obligatorio</div>
           </ng-template>
         </p-messages>
       </div>
@@ -36,6 +36,18 @@
           rows="3"
           class="custom-textarea"
         ></textarea>
+
+        <p-messages
+          severity="error"
+          *ngIf="
+            projectForm.get('description')?.hasError('required') &&
+            projectForm.get('description')?.touched
+          "
+        >
+          <ng-template pTemplate>
+            <div class="ml-2">La descripción es obligatoria</div>
+          </ng-template>
+        </p-messages>
       </div>
       <button
         pButton

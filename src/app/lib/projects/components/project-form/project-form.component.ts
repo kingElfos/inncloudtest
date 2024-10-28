@@ -20,51 +20,51 @@ export class ProjectFormComponent implements OnInit {
   private projectId!: string;
 
   ngOnInit(): void {
-    this.projectId = this.route.snapshot.paramMap.get('projectId')!;
+    this.projectId = this.route.snapshot.paramMap.get('id') !;
     if (this.projectId) {
       this.isEdit = true;
-      const project = this.projectService.getById(this.projectId);
-      this.initForm(project);
+      this.loadForm();
     } else {
       this.initForm();
     }
   }
 
-  initForm(project?: ProjectI) {
+  initForm() {
     this.projectForm = this.fb.group({
-      id: [project?.id || crypto.randomUUID()],
-      name: [project?.name || '', Validators.required],
-      email: [project?.email || 'bcadavid@gmail.com', Validators.email],
-      description: [project?.description || ''],
-      website: [project?.website || 'www.incloud.com'],
-      company: [project?.company || { name: 'incloud' }],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
     });
+  }
+
+  loadForm() {
+    this.projectService.getById(this.projectId).subscribe((project: ProjectI) => {
+      this.projectForm = this.fb.group({
+        name: [project.name, Validators.required],
+        description: [project.description, Validators.required],
+      });
+    })
   }
 
   onSubmit() {
     if (this.projectForm.valid) {
       const project = this.projectForm.value;
       if (this.isEdit) {
-        this.projectService.put(this.projectId, project);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Operación exitosa',
-          detail: 'Proyecto actualizado',
-          life: 1500,
-        });
+        this.projectService.put(this.projectId, project)
+        .subscribe((project: ProjectI) => this.showMessage("Proyecto editado"));
       } else {
-        this.projectService.insert(project);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Operación exitosa',
-          detail: 'Proyecto creado',
-          life: 1500,
-        });
+        this.projectService.post(project)
+        .subscribe((project: ProjectI) => this.showMessage("Proyecto creado"));
       }
 
-      setTimeout(() => {
-        this.router.navigate(['/projects/list']);
-      }, 1500);
     }
+  }
+  showMessage(message:string,summary="Operación exitosa",severity="success") {
+    this.messageService.add({
+      severity,
+      summary,
+      detail: message,
+      life: 1500,
+    });
+    this.router.navigate(['/projects/list']);
   }
 }

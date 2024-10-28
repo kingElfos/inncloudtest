@@ -4,8 +4,8 @@ import { ProjectListComponent } from '../components/project-list/project-list.co
 import { ProjectFormComponent } from '../components/project-form/project-form.component';
 const routes: Routes = [
   { path: 'list', component: ProjectListComponent },
-  { path: 'handle', component: ProjectFormComponent },
-  { path: 'handle/:projectId', component: ProjectFormComponent },
+  { path: 'newproject', component: ProjectFormComponent },
+  { path: 'editproject/:id', component: ProjectFormComponent },
   { path: '', redirectTo: 'list', pathMatch: 'full' },
 ];
 
