@@ -10,7 +10,7 @@ export class HttpErrorService {
 
   handleError(error: HttpErrorResponse) {
     const errorMessage: string = error.error.message;
-    console.log(errorMessage)
+    console.log(errorMessage);
     this.messageService.add({
       severity: 'error',
       summary: 'Error en la petición',

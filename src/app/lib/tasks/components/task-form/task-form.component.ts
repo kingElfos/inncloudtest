@@ -20,8 +20,6 @@ export class TaskFormComponent implements OnInit {
   private projectId!: string;
   protected taskId!: string;
 
-  
-
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('projectId')!;
     this.taskId = this.route.snapshot.paramMap.get('taskId')!;
@@ -33,7 +31,7 @@ export class TaskFormComponent implements OnInit {
 
   initForm() {
     this.taskForm = this.fb.group({
-      id:[null],
+      id: [null],
       project_id: [this.projectId],
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -42,16 +40,15 @@ export class TaskFormComponent implements OnInit {
   }
 
   loadForm() {
-    this.taskService.getById(this.taskId)
-    .subscribe((task: TaskI) => {
-      console.log(task)
-      if(task){
+    this.taskService.getById(this.taskId).subscribe((task: TaskI) => {
+      console.log(task);
+      if (task) {
         this.taskForm.patchValue({
-          id:task.id,
-          title:task.title,
-          description:task.description,
-          completed:task.completed===1
-        })
+          id: task.id,
+          title: task.title,
+          description: task.description,
+          completed: task.completed === 1,
+        });
       }
     });
   }
@@ -60,11 +57,15 @@ export class TaskFormComponent implements OnInit {
     if (this.taskForm.valid) {
       const task = this.taskForm.value;
       if (this.taskId && this.projectId) {
-        this.taskService.put(task)
-        .subscribe((task: TaskI) => task && this.showMessage('Tarea editada'));
+        this.taskService
+          .put(task)
+          .subscribe(
+            (task: TaskI) => task && this.showMessage('Tarea editada'),
+          );
       } else {
-        this.taskService.post(task)
-        .subscribe((task: TaskI) => task && this.showMessage('Tarea creada'));
+        this.taskService
+          .post(task)
+          .subscribe((task: TaskI) => task && this.showMessage('Tarea creada'));
       }
     }
   }

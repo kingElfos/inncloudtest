@@ -18,8 +18,8 @@ export class TaskListComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   public projectId!: string;
-  public tasks$: Observable < TaskI[] > ;
-  public isLoading$: Observable < boolean > ;
+  public tasks$: Observable<TaskI[]>;
+  public isLoading$: Observable<boolean>;
 
   constructor() {
     this.tasks$ = this.taskService.tasks$;
@@ -27,7 +27,7 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
-    const projectId = this.route.snapshot.paramMap.get('projectId') !;
+    const projectId = this.route.snapshot.paramMap.get('projectId')!;
     this.projectId = projectId;
     this.taskService.loadTasks(projectId);
   }
@@ -39,6 +39,7 @@ export class TaskListComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.taskService.delete(id).subscribe((task: TaskI) => {
+          this.taskService.loadTasks(this.projectId);
           this.messageService.add({
             severity: 'success',
             summary: 'Eliminado',

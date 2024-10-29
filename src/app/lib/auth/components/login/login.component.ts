@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       if (this.authService.login(username, password)) {
-        this.authService.getCsrfToken().subscribe();
         this.router.navigate(['/projects']);
       } else {
         alert('clave incorrecta');

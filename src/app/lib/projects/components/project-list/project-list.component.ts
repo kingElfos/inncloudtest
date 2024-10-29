@@ -31,6 +31,7 @@ export class ProjectListComponent {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.projectService.delete(id).subscribe((project: ProjectI) => {
+          this.projectService.loadProjects();
           this.messageService.add({
             severity: 'success',
             summary: 'Eliminado',

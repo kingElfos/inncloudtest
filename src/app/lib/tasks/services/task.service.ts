@@ -20,18 +20,18 @@ export class TaskService {
   private errorHandler = inject(HttpErrorService);
   private http = inject(HttpClient);
 
-  public getTasksByProject(projectId: string){
+  public getTasksByProject(projectId: string) {
     return this.http
       .get<TaskI[]>(`${this.apiUrl}/getTasksByProject/${projectId}`)
       .pipe(
-        map((tasks)=>{
-          return tasks.map((task)=>{
-            task.completed=task.completed===1;
+        map((tasks) => {
+          return tasks.map((task) => {
+            task.completed = task.completed === 1;
             return task;
-          })
+          });
         }),
-        withLoading(this.loadingSubject, this.errorHandler, [])
-        );
+        withLoading(this.loadingSubject, this.errorHandler, []),
+      );
   }
 
   public post(task: TaskI) {
@@ -53,7 +53,6 @@ export class TaskService {
   }
 
   public getById(id: string) {
-    
     return this.http
       .get<TaskI>(`${this.apiUrl}/${id}`)
       .pipe(withLoading(this.loadingSubject, this.errorHandler, null));

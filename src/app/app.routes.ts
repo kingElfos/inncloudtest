@@ -2,17 +2,18 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './lib/auth/guards/auth.guard';
 import { LayoutComponent } from './lib/shared/components/layout/layout.component';
 
-export const routes: Routes = [{
+export const routes: Routes = [
+  {
     path: '',
     component: LayoutComponent,
     canActivate: [AuthGuard],
-    children: [{
+    children: [
+      {
         path: 'projects',
         loadChildren: () =>
           import('./lib/projects/projects.module').then(
             (m) => m.ProjectsModule,
           ),
-
       },
       {
         path: 'tasks',
@@ -33,8 +34,4 @@ export const routes: Routes = [{
     loadChildren: () =>
       import('./lib/auth/auth.module').then((m) => m.AuthModule),
   },
-
-
-
-
 ];

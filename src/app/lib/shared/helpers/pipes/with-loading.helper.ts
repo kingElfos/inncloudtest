@@ -1,13 +1,12 @@
-
 import { tap, finalize, catchError } from 'rxjs/operators';
-import { BehaviorSubject, Observable,of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler } from '@angular/core';
 
 export function withLoading<T>(
   loadingSubject: BehaviorSubject<boolean>,
   errorHandler: ErrorHandler,
-  errorResponse:any,
+  errorResponse: any,
 ) {
   return (source: Observable<T>) =>
     source.pipe(

@@ -1,3 +1,5 @@
+{{isLoading$|async}}
+
 <div class="task-list">
   <h2 class="p-text-center p-mb-4">Lista de Tareas</h2>
   <div
@@ -30,11 +32,11 @@
           <td class="p-text-center">{{ task.title }}</td>
           <td class="p-text-center text-ellipsis">{{ task.description }}</td>
           <td class="p-text-center">
-            {{ task.completed  }}
+            {{ task.completed ? 'Completada':'Pendiente' }}
           </td>
-          
+
           <td class="p-text-center">
-             <p-checkbox
+            <p-checkbox
               [(ngModel)]="task.completed"
               binary="true"
               (onChange)="updateTaskStatus(task)"

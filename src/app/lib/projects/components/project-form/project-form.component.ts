@@ -20,7 +20,7 @@ export class ProjectFormComponent implements OnInit {
   protected projectId!: string;
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
     this.projectId = this.route.snapshot.paramMap.get('id')!;
     if (this.projectId) {
       this.loadForm();
@@ -29,7 +29,7 @@ export class ProjectFormComponent implements OnInit {
 
   initForm() {
     this.projectForm = this.fb.group({
-      id:[null],
+      id: [null],
       name: ['', Validators.required],
       description: ['', Validators.required],
     });
@@ -40,10 +40,10 @@ export class ProjectFormComponent implements OnInit {
       .getById(this.projectId)
       .subscribe((project: ProjectI) => {
         this.projectForm.patchValue({
-         id:project.id,
-         name:project.name,
-         description:project.description
-        })
+          id: project.id,
+          name: project.name,
+          description: project.description,
+        });
       });
   }
 
@@ -53,11 +53,17 @@ export class ProjectFormComponent implements OnInit {
       if (this.projectId) {
         this.projectService
           .put(this.projectId, project)
-          .subscribe((project: ProjectI) => project && this.showMessage('Proyecto editado'));
+          .subscribe(
+            (project: ProjectI) =>
+              project && this.showMessage('Proyecto editado'),
+          );
       } else {
         this.projectService
           .post(project)
-          .subscribe((project: ProjectI) => project && this.showMessage('Proyecto creado'));
+          .subscribe(
+            (project: ProjectI) =>
+              project && this.showMessage('Proyecto creado'),
+          );
       }
     }
   }
