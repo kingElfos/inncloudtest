@@ -1,6 +1,6 @@
 <p-toast [life]="1500" />
 <div class="custom-card">
-  <p-card [header]="isEdit ? 'Editar tarea' : 'Crear tarea'">
+  <p-card [header]="taskId ? 'Editar tarea' : 'Crear tarea'">
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form">
       <div class="p-field">
         <label for="title">Título</label>
@@ -20,6 +20,30 @@
         >
           <ng-template pTemplate>
             <div class="ml-2">El título es obligatorio</div>
+          </ng-template>
+        </p-messages>
+      </div>
+
+
+      <div class="p-field">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          pInputTextarea
+          formControlName="description"
+          rows="3"
+          class="custom-textarea"
+        ></textarea>
+
+        <p-messages
+          severity="error"
+          *ngIf="
+            taskForm.get('description')?.hasError('required') &&
+            taskForm.get('description')?.touched
+          "
+        >
+          <ng-template pTemplate>
+            <div class="ml-2">La descripción es obligatoria</div>
           </ng-template>
         </p-messages>
       </div>

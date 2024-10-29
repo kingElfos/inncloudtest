@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TaskI } from '../../models/task.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TaskService } from '../../services/task.service';
+import { TaskService } from '@tasks/services/task.service';
+import { TaskI } from '@tasks/models/task.model';
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -17,55 +17,68 @@ export class TaskFormComponent implements OnInit {
   protected taskService = inject(TaskService);
   private messageService = inject(MessageService);
   protected taskForm!: FormGroup;
-  protected isEdit = false;
   private projectId!: string;
-  private taskId!: string;
+  protected taskId!: string;
+
+  
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.paramMap.get('projectId')!;
     this.taskId = this.route.snapshot.paramMap.get('taskId')!;
-    if (this.projectId && this.taskId) {
-      this.isEdit = true;
-      const task = this.taskService.getById(this.taskId);
-      this.initForm(task);
-    } else {
-      this.initForm();
+    this.initForm();
+    if (this.taskId && this.projectId) {
+      this.loadForm();
     }
   }
 
-  initForm(task?: TaskI) {
+  initForm() {
     this.taskForm = this.fb.group({
-      id: [this.projectId],
-      taskId: [task?.taskId || crypto.randomUUID()],
-      title: [task?.title || '', Validators.required],
-      completed: [task?.completed || false],
+      id:[null],
+      project_id: [this.projectId],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      completed: [false],
+    });
+  }
+
+  loadForm() {
+    this.taskService.getById(this.taskId)
+    .subscribe((task: TaskI) => {
+      console.log(task)
+      if(task){
+        this.taskForm.patchValue({
+          id:task.id,
+          title:task.title,
+          description:task.description,
+          completed:task.completed===1
+        })
+      }
     });
   }
 
   onSubmit() {
     if (this.taskForm.valid) {
       const task = this.taskForm.value;
-      if (this.isEdit) {
-        this.taskService.put(this.taskId, task);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Operación exitosa',
-          detail: 'Tarea actualizada',
-          life: 1500,
-        });
+      if (this.taskId && this.projectId) {
+        this.taskService.put(task)
+        .subscribe((task: TaskI) => task && this.showMessage('Tarea editada'));
       } else {
-        this.taskService.insert(task);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Operación exitosa',
-          detail: 'Tarea creada',
-          life: 1500,
-        });
+        this.taskService.post(task)
+        .subscribe((task: TaskI) => task && this.showMessage('Tarea creada'));
       }
-
-      setTimeout(() => {
-        this.router.navigate([`/tasks/list/${this.projectId}`]);
-      }, 1500);
     }
+  }
+  showMessage(
+    message: string,
+    summary = 'Operación exitosa',
+    severity = 'success',
+  ) {
+    this.messageService.add({
+      severity,
+      summary,
+      detail: message,
+      life: 1500,
+    });
+    this.router.navigateByUrl(`/tasks/list/${this.projectId}`);
   }
 }

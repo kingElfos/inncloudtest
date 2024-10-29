@@ -6,8 +6,8 @@ import { ProjectListComponent } from './components/project-list/project-list.com
 import { ProjectFormComponent } from './components/project-form/project-form.component';
 import { ProjectsRoutingModule } from './routing/projects-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
-import { HttpErrorHandlerService } from '../shared/services/http-error-handler.service';
-import { SkeletonComponent } from '../shared/components/skeleton/skeleton.component';
+import { HttpErrorService } from '@shared/services/http-errors.service';
+import { SkeletonComponent } from '@shared/components/skeleton/skeleton.component';
 
 @NgModule({
   declarations: [ProjectListComponent, ProjectFormComponent],
@@ -18,6 +18,6 @@ import { SkeletonComponent } from '../shared/components/skeleton/skeleton.compon
     PrimengModule,
     SkeletonComponent,
   ],
-  providers: [HttpErrorHandlerService, ProjectService],
+  providers: [HttpErrorService, ProjectService],
 })
 export class ProjectsModule {}

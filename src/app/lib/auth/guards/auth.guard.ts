@@ -14,10 +14,7 @@ export class AuthGuard implements CanActivate {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  canActivate(
-    _: ActivatedRouteSnapshot,
-    __: RouterStateSnapshot,
-  ): boolean {
+  canActivate(_: ActivatedRouteSnapshot, __: RouterStateSnapshot): boolean {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {

@@ -1,6 +1,6 @@
 <p-toast [life]="1500" />
 <div class="custom-card">
-  <p-card [header]="isEdit ? 'Editar proyecto' : 'Crear proyecto'">
+  <p-card [header]="projectId ? 'Editar proyecto' : 'Crear proyecto'">
     <form
       [formGroup]="projectForm"
       (ngSubmit)="onSubmit()"

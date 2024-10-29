@@ -1,6 +1,7 @@
 export interface TaskI {
-  title:string,
-  description:string,
-  completed:boolean,
-  project_id:string
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean | number;
+  project_id: string;
 }

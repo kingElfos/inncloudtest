@@ -6,7 +6,10 @@
     "baseUrl": "src",
     "paths": {
       "@root/*": ["*"],
-       "@lib/*": ["app/lib/*"]
+       "@shared/*": ["app/lib/shared/*"],
+       "@projects/*": ["app/lib/projects/*"],
+       "@tasks/*": ["app/lib/tasks/*"],
+       "@auth/*": ["app/lib/auth/*"],
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

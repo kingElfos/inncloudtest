@@ -5,11 +5,12 @@ import { MessageService } from 'primeng/api';
 @Injectable({
   providedIn: 'root',
 })
-export class HttpErrorHandlerService {
+export class HttpErrorService {
   private messageService = inject(MessageService);
 
   handleError(error: HttpErrorResponse) {
     const errorMessage: string = error.error.message;
+    console.log(errorMessage)
     this.messageService.add({
       severity: 'error',
       summary: 'Error en la petición',

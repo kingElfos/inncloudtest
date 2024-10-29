@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, finalize } from 'rxjs/operators';
-import { ProjectI } from '../models/project.model';
 import { of, BehaviorSubject, Observable, tap } from 'rxjs';
-import { HttpErrorHandlerService } from '../../shared/services/http-error-handler.service';
+import { catchError, finalize } from 'rxjs/operators';
+import { ProjectI } from '@projects/models/project.model';
+import { HttpErrorService } from '@shared/services/http-errors.service';
+import { withLoading } from '@shared/helpers/pipes/with-loading.helper';
 import { environment } from '@root/environments/environment';
 
 @Injectable({
@@ -11,57 +12,44 @@ import { environment } from '@root/environments/environment';
 })
 export class ProjectService {
   private apiUrl = `${environment.apiUrl}/projects`;
-  public projects$ = new BehaviorSubject<ProjectI[]>([]);
-  public isLoading$ = new BehaviorSubject<boolean>(false);
-  private errorHandler = inject(HttpErrorHandlerService);
+  private projectsSubject = new BehaviorSubject<ProjectI[]>([]);
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  public projects$ = this.projectsSubject.asObservable();
+  public isLoading$ = this.loadingSubject.asObservable();
+  private errorHandler = inject(HttpErrorService);
   private http = inject(HttpClient);
 
- 
-
-  
   public get(): Observable<ProjectI[]> {
-    return this.http.get<ProjectI[]>(this.apiUrl).pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.errorHandler.handleError(error);
-        return of([]);
-      }),
-    );
+    return this.http
+      .get<ProjectI[]>(this.apiUrl)
+      .pipe(withLoading(this.loadingSubject, this.errorHandler, []));
   }
 
   public post(project: ProjectI) {
-    return this.http.post<ProjectI | null>(this.apiUrl,project).pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.errorHandler.handleError(error);
-        return of(null);
-      }),
-    );
+    return this.http
+      .post<ProjectI>(this.apiUrl, project)
+      .pipe(withLoading(this.loadingSubject, this.errorHandler, null));
   }
 
   public put(id: string, project: ProjectI) {
-    return this.http.put<ProjectI | null>(`${environment.apiUrl}/${id}`,project).pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.errorHandler.handleError(error);
-        return of(null);
-      }),
-    );
+    return this.http
+      .put<ProjectI>(`${this.apiUrl}/${id}`, project)
+      .pipe(withLoading(this.loadingSubject, this.errorHandler, null));
   }
 
   public delete(id: string) {
-    return this.http.delete<ProjectI | null>(`${environment.apiUrl}/${id}`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.errorHandler.handleError(error);
-        return of(null);
-      }),
-    );
+    return this.http
+      .delete<ProjectI>(`${this.apiUrl}/${id}`)
+      .pipe(withLoading(this.loadingSubject, this.errorHandler, null));
   }
 
   public getById(id: string) {
-   return this.http.get<ProjectI | null>(`${environment.apiUrl}/${id}`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.errorHandler.handleError(error);
-        return of(null);
-      }),
-    );
+    return this.http
+      .get<ProjectI>(`${this.apiUrl}/${id}`)
+      .pipe(withLoading(this.loadingSubject, this.errorHandler, null));
   }
-  
+
+  public loadProjects(): void {
+    this.get().subscribe((projects) => this.projectsSubject.next(projects));
+  }
 }

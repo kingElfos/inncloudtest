@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TasksRoutingModule } from './routing/tasks-routing.module';
-import { HttpErrorHandlerService } from '../shared/services/http-error-handler.service';
+import { HttpErrorService } from '@shared/services/http-errors.service';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from './services/task.service';
 
@@ -18,6 +18,6 @@ import { TaskService } from './services/task.service';
     FormsModule,
     PrimengModule,
   ],
-  providers: [HttpErrorHandlerService, TaskService],
+  providers: [HttpErrorService, TaskService],
 })
 export class TasksModule {}

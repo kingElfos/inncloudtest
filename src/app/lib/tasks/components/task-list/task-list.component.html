@@ -1,7 +1,7 @@
 <div class="task-list">
   <h2 class="p-text-center p-mb-4">Lista de Tareas</h2>
   <div
-    [routerLink]="'/tasks/handle/' + projectId"
+    [routerLink]="'/tasks/newtask/' + projectId"
     class="p-d-flex p-jc-end p-mb-2 btn-add"
   >
     <button
@@ -19,26 +19,28 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th class="p-text-center">ID</th>
           <th class="p-text-center">Título</th>
+          <th class="p-text-center">Descripción</th>
           <th class="p-text-center">Estado</th>
           <th class="p-text-center">Acciones</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-task>
         <tr>
-          <td class="p-text-center">{{ task.taskId }}</td>
-          <td class="p-text-center text-ellipsis">{{ task.title }}</td>
+          <td class="p-text-center">{{ task.title }}</td>
+          <td class="p-text-center text-ellipsis">{{ task.description }}</td>
           <td class="p-text-center">
-            <p-checkbox
+            {{ task.completed  }}
+          </td>
+          
+          <td class="p-text-center">
+             <p-checkbox
               [(ngModel)]="task.completed"
               binary="true"
               (onChange)="updateTaskStatus(task)"
             ></p-checkbox>
-          </td>
-          <td class="p-text-center">
             <button
-              [routerLink]="'/tasks/handle/' + projectId + '/' + task.taskId"
+              [routerLink]="'/tasks/editask/' + task.project_id + '/' + task.id"
               pButton
               icon="pi pi-pencil"
               class="p-button-rounded p-button-warning p-button-text"
@@ -47,7 +49,7 @@
               pButton
               icon="pi pi-trash"
               class="p-button-rounded p-button-danger p-button-text"
-              (click)="confirmDelete(task.taskId)"
+              (click)="confirmDelete(task.id)"
             ></button>
           </td>
         </tr>

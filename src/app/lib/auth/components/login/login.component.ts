@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       if (this.authService.login(username, password)) {
+        this.authService.getCsrfToken().subscribe();
         this.router.navigate(['/projects']);
       } else {
         alert('clave incorrecta');

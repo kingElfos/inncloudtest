@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
-
+import { Injectable, inject } from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { environment } from '@root/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private isAuthenticated = false;
+  private http = inject(HttpClient);
+
 
   get isbrowser() {
     return typeof window !== 'undefined';
@@ -29,5 +33,11 @@ export class AuthService {
       return localStorage.getItem('isAuthenticated') === 'true';
     }
     return false;
+  }
+  
+  public getCsrfToken(): Observable<{csrf_token:string}> {
+    return this.http
+      .get<{csrf_token:string}>(`${environment.apiUrl}/csrf-token`)
+      .pipe(tap((data)=>this.isbrowser && localStorage.setItem(environment.csrfKey,data.csrf_token)));
   }
 }

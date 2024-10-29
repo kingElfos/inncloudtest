@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { ProjectService } from '../../services/project.service';
-import { ProjectI } from '../../models/project.model';
-import { BehaviorSubject } from 'rxjs';
+import { ProjectService } from '@projects/services/project.service';
+import { ProjectI } from '@projects/models/project.model';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
@@ -16,10 +16,13 @@ export class ProjectListComponent {
   private confirmationService = inject(ConfirmationService);
   private messageService = inject(MessageService);
   private router = inject(Router);
-  protected projects$: BehaviorSubject<ProjectI[]> =
-    this.projectService.projects$;
-  protected isLoading$: BehaviorSubject<boolean> =
-    this.projectService.isLoading$;
+  public projects$: Observable<ProjectI[]>;
+  public isLoading$: Observable<boolean>;
+  constructor() {
+    this.projects$ = this.projectService.projects$;
+    this.isLoading$ = this.projectService.isLoading$;
+    this.projectService.loadProjects();
+  }
 
   confirmDelete(id: string) {
     this.confirmationService.confirm({
@@ -27,11 +30,12 @@ export class ProjectListComponent {
       header: 'Confirmación de eliminación',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.projectService.delete(id);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Eliminado',
-          detail: 'El proyecto fue eliminado con éxito',
+        this.projectService.delete(id).subscribe((project: ProjectI) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Eliminado',
+            detail: 'El proyecto fue eliminado con éxito',
+          });
         });
       },
       reject: () => {
