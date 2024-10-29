@@ -1,22 +1,11 @@
 <div class="task-list">
   <h2 class="p-text-center p-mb-4">Lista de Tareas</h2>
-  <div
-    [routerLink]="'/tasks/newtask/' + projectId"
-    class="p-d-flex p-jc-end p-mb-2 btn-add"
-  >
-    <button
-      pButton
-      label="Agregar Tarea"
-      icon="pi pi-plus"
-      class="p-button-success"
-    ></button>
+  <div [routerLink]="'/tasks/newtask/' + projectId" class="p-d-flex p-jc-end p-mb-2 btn-add">
+    <button pButton label="Agregar Tarea" icon="pi pi-plus" class="p-button-success"></button>
   </div>
+  @if ((isLoading$ | async) === false) {
   <ng-container *ngIf="tasks$ | async as tasks">
-    <p-table
-      [value]="tasks"
-      class="p-datatable-gridlines p-datatable-sm p-datatable-striped p-mb-4"
-      [tableStyle]="{ 'min-width': '50rem' }"
-    >
+    <p-table [value]="tasks" class="p-datatable-gridlines p-datatable-sm p-datatable-striped p-mb-4" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template pTemplate="header">
         <tr>
           <th class="p-text-center">Título</th>
@@ -32,37 +21,18 @@
           <td class="p-text-center">
             {{ task.completed ? 'Completada' : 'Pendiente' }}
           </td>
-
           <td class="p-text-center">
-            <p-checkbox
-              [(ngModel)]="task.completed"
-              binary="true"
-              (onChange)="updateTaskStatus(task)"
-            ></p-checkbox>
-            <button
-              [routerLink]="'/tasks/editask/' + task.project_id + '/' + task.id"
-              pButton
-              icon="pi pi-pencil"
-              class="p-button-rounded p-button-warning p-button-text"
-            ></button>
-            <button
-              pButton
-              icon="pi pi-trash"
-              class="p-button-rounded p-button-danger p-button-text"
-              (click)="confirmDelete(task.id)"
-            ></button>
+            <p-checkbox [(ngModel)]="task.completed" binary="true" (onChange)="updateTaskStatus(task)"></p-checkbox>
+            <button [routerLink]="'/tasks/editask/' + task.project_id + '/' + task.id" pButton icon="pi pi-pencil" class="p-button-rounded p-button-warning p-button-text"></button>
+            <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="confirmDelete(task.id)"></button>
           </td>
         </tr>
       </ng-template>
     </p-table>
   </ng-container>
+  }@else {
+    <app-skeleton />
+  }
 </div>
-
-<p-confirmDialog
-  header="Confirmación"
-  icon="pi pi-exclamation-triangle"
-  acceptLabel="Sí"
-  rejectLabel="No"
-></p-confirmDialog>
-
+<p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle" acceptLabel="Sí" rejectLabel="No"></p-confirmDialog>
 <p-toast [life]="1500" />

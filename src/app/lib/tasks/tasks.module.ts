@@ -8,7 +8,7 @@ import { TasksRoutingModule } from './routing/tasks-routing.module';
 import { HttpErrorService } from '@shared/services/http-errors.service';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from './services/task.service';
-
+import { SkeletonComponent } from '@shared/components/skeleton/skeleton.component';
 @NgModule({
   declarations: [TaskListComponent, TaskFormComponent],
   imports: [
@@ -17,6 +17,7 @@ import { TaskService } from './services/task.service';
     ReactiveFormsModule,
     FormsModule,
     PrimengModule,
+    SkeletonComponent
   ],
   providers: [HttpErrorService, TaskService],
 })
