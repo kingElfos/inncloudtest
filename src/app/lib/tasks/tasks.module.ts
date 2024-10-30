@@ -17,7 +17,7 @@ import { SkeletonComponent } from '@shared/components/skeleton/skeleton.componen
     ReactiveFormsModule,
     FormsModule,
     PrimengModule,
-    SkeletonComponent
+    SkeletonComponent,
   ],
   providers: [HttpErrorService, TaskService],
 })

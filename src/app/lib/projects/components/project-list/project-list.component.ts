@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, inject } from '@angular/core';
 import { ProjectService } from '@projects/services/project.service';
 import { ProjectI } from '@projects/models/project.model';
@@ -10,6 +11,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListComponent {
   private projectService = inject(ProjectService);

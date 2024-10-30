@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
@@ -10,5 +11,6 @@ import { HeaderComponent } from '../header/header.component';
     <app-header></app-header>
     <router-outlet></router-outlet>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {}

@@ -8,7 +8,7 @@ export function withLoading<T>(
   errorHandler: ErrorHandler,
   errorResponse: any,
 ) {
-  loadingSubject.next(true)
+  loadingSubject.next(true);
   return (source: Observable<T>) =>
     source.pipe(
       finalize(() => loadingSubject.next(false)),

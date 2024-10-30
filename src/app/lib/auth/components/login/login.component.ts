@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,7 +8,7 @@ import { AuthService } from '@auth/services/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-})
+  changeDetection: ChangeDetectionStrategy.OnPush })
 export class LoginComponent implements OnInit {
   protected loginForm!: FormGroup;
   protected authService = inject(AuthService);
