@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects":
   {
-    "inncloudtest":
+    "trello":
     {
       "projectType": "application",
       "schematics":
@@ -24,12 +24,10 @@
           "builder": "@angular-devkit/build-angular:application",
           "options":
           {
-            "outputPath": "dist/inncloudtest",
+            "outputPath": "dist/trello",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -38,7 +36,7 @@
               "input": "public"
             }],
             "styles": [
-              "node_modules/primeng/resources/themes/saga-orange/theme.css",
+              "node_modules/primeng/resources/themes/luna-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "src/styles.scss"
@@ -89,11 +87,11 @@
           {
             "production":
             {
-              "buildTarget": "inncloudtest:build:production"
+              "buildTarget": "trello:build:production"
             },
             "development":
             {
-              "buildTarget": "inncloudtest:build:development"
+              "buildTarget": "trello:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -107,10 +105,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options":
           {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [

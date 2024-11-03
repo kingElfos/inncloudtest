@@ -1,0 +1,63 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+
+  .login-btn {
+    margin-top: 10px;
+  }
+  .left-section {
+    background: linear-gradient(to bottom right, #ea2e25, #f98d0b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    width: 400px;
+
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .logo {
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .right-section {
+    background: linear-gradient(to bottom right, #ffffff, #e6d18f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .left-section {
+      display: none;
+    }
+
+    .right-section {
+      width: 100%;
+    }
+  }
+}

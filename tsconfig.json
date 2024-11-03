@@ -5,11 +5,9 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@root/*": ["*"],
-       "@shared/*": ["app/lib/shared/*"],
-       "@projects/*": ["app/lib/projects/*"],
-       "@tasks/*": ["app/lib/tasks/*"],
-       "@auth/*": ["app/lib/auth/*"],
+       "@auth/*": ["app/auth/*"],
+       "@env/*":["environments/*"],
+       "@core/*": ["../core/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
