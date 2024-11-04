@@ -5,8 +5,9 @@
   .login-btn {
     margin-top: 10px;
   }
+
   .left-section {
-    background: linear-gradient(to bottom right, #ea2e25, #f98d0b);
+    background: linear-gradient(to bottom right, #ffffff, #e0f0f8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,25 +27,29 @@
       }
 
       h2 {
+        color: #0079bf;
         font-size: 1.5rem;
       }
     }
   }
 
   .right-section {
-    background: linear-gradient(to bottom right, #ffffff, #e6d18f);
+    background: linear-gradient(to bottom right, #0079bf, #70b3d0);
+
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     width: 100%;
-    border-radius: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     animation: fadeIn 0.5s ease-in-out;
 
     @keyframes fadeIn {
       from {
         opacity: 0;
       }
+
       to {
         opacity: 1;
       }
@@ -58,6 +63,10 @@
 
     .right-section {
       width: 100%;
+      border-top-left-radius: 0;
+      /* Esquina superior izquierda */
+      border-bottom-left-radius: 0;
+      /* Esquina inferior izquierda */
     }
   }
 }
